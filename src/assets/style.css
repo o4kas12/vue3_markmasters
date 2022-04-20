@@ -109,6 +109,13 @@ a {
     font-size: large;
 }
 
+.greenClass {
+    background-color: lightgreen!important;
+}
+.redClass {
+    background-color: lightcoral!important;
+}
+
 .btn .nav-item {
     border-radius: 0!important;
 }
@@ -118,6 +125,10 @@ div.nav-item + a.router-link-active {
     text-decoration: #1c1c21;
     background-color: white;
     min-width: 100%;
+}
+
+ul li.checkboxesAccordion {
+    width: 7%;
 }
 
 @media (max-width: 768px) {
@@ -145,11 +156,17 @@ div.nav-item + a.router-link-active {
     ul li {
         width: 50%;
     }
+    ul li.checkboxesAccordion {
+        width: 10%;
+    }
 }
 
 @media (max-width: 1000px) {
     ul li {
         width: 100%;
+    }
+    ul li.checkboxesAccordion {
+        width: 25%;
     }
 }
 

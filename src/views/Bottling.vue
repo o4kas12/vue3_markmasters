@@ -6,17 +6,41 @@
           <AccordionStations msg="Welcome to Your Vue.js App" />
         </h1>
         <hr />
+        <ul class="input-group col-sm-9">
+          <li
+            class="nostyle checkboxesAccordion"
+            v-for="(item, index) in machines"
+            v-bind:key="index"
+          >
+            <input
+              type="checkbox"
+              checked="checked"
+              :id="'chkbx' + machines[index]['main']['id']"
+              v-model="checkedMachines[index]"
+            />
+            {{ machines[index]["main"]["id"] }}
+          </li>
+        </ul>
+        {{ checkedMachines }}
+        {{ machineState }}
+        <hr />
         <br />
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <div
             class="accordion-item"
+            :id="machines[index]['main']['id']"
             v-for="(item, index) in machines"
             v-bind:key="index"
           >
-            <h2 class="accordion-header" :id="'panelsStayOpen-heading' + index">
+            <h2 class="accordion-header" :id="machines[index]['main']['id']">
               <button
                 class="accordion-button collapsed"
+                :class="{
+                  greenClass: machineState[index] === 'greenClass',
+                  redClass: machineState[index] === 'redClass',
+                }"
                 type="button"
+                v-if="checkedMachines[index]"
                 data-bs-toggle="collapse"
                 :data-bs-target="'#panelsStayOpen-collapse' + index"
                 aria-expanded="false"
@@ -33,6 +57,9 @@
                       )
                   ].name_gp
                 }}
+                <strong>{{
+                  machines[index]["plc_state"]["message_from_plc"]
+                }}</strong>
               </button>
             </h2>
             <div
@@ -40,7 +67,7 @@
               class="accordion-collapse collapse"
               :aria-labelledby="'panelsStayOpen-heading' + index"
             >
-              <span class="accordion-body">
+              <span class="accordion-body" v-if="checkedMachines[index]">
                 <ul>
                   <li
                     class="nostyle accordion-content1"
@@ -84,9 +111,10 @@ export default {
   data() {
     return {
       machines: [],
-      machine: null,
       checkedMachines: [],
       productList: [],
+      machineState: [],
+      machineNames: [],
     };
   },
   components: {
@@ -99,10 +127,26 @@ export default {
           "http://192.168.100.100/terminal/markstation/get_all_stat"
         );
         const data = await f.json();
-        console.log(data);
+        //console.log(data);
         this.machines = data;
+        let machineState = [];
+        for (let i = 0; i < this.machines.length; i++) {
+          let y = null;
+          if (data[i]["plc_state"]["machine_status"] === "1") {
+            y = "greenClass";
+          } else {
+            y = "redClass";
+          }
+          machineState.push(String(y));
+        }
+        //console.log(machineState);
+        console.log("machineState");
+        this.machineState = machineState;
       }, interval);
-      console.log("getIDs");
+    },
+    checkedIds() {
+      this.checkedMachines = new Array(this.machines.length).fill(true);
+      console.log(this.checkedMachines);
     },
     getProduct() {
       const path =
@@ -115,6 +159,7 @@ export default {
   },
   created() {
     this.getProduct();
+    this.checkedIds();
     this.getIds(3000);
   },
 };
