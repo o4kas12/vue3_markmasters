@@ -1,0 +1,144 @@
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
+
+nav {
+    padding: 30px;
+}
+
+nav a {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+    color: #42b983;
+}
+
+.logoPMZ {
+    width: 150px;
+}
+
+ul li {
+    float: left;
+    width: 33%;
+}
+
+li.nostyle {
+    list-style-type: none;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.sidebar {
+    width: 14rem;
+    min-height: 100vh;
+    background-color: #8FD4C1;
+}
+
+.nav-button {
+    border-radius: 0;
+    width: 100%;
+    background-color: gray;
+}
+
+.nav-button:active,
+.nav-button:focus,
+.nav-button:hover {
+    outline-style: none!important;
+    background-color: #545b62;
+}
+
+.router-link-exact-active .nav-button{
+    background-color: #545b62;
+}
+
+.align-items-start {
+    align-items: flex-start !important;
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+#wrapper #content-wrapper {
+    background-color: #f8f9fc;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+#wrapper #content-wrapper #content {
+    flex: 1 0 auto;
+}
+
+.container, .container-fluid, .container-sm, .container-md,
+.container-lg, .container-xl, .container-xxl {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-top: 50px;
+}
+
+#wrapper {
+    display: flex;
+}
+
+a {
+    text-decoration-line: blink;
+    color: darkslategrey;
+    font-size: large;
+}
+
+.btn .nav-item {
+    border-radius: 0!important;
+}
+
+div.nav-item + a.router-link-active {
+    border-color: #1c1c21;
+    text-decoration: #1c1c21;
+    background-color: white;
+    min-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 6.5rem !important;
+    }
+    .logoPMZ {
+        width: 100px;
+    }
+    .nav-button {
+        width: 6.5rem;
+        height: 100px;
+    }
+    .logoCard {
+        width: 6.5rem !important;
+        padding-left: 0!important;
+    }
+    .main-content {
+        padding-left: 0.1rem!important;
+        padding-right: 0.1rem!important;
+    }
+    ul li {
+        width: 100%;
+    }
+}
