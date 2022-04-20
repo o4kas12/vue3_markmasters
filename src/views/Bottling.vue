@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-10">
+      <div class="col-sm-12">
         <h1>
           <AccordionStations msg="Welcome to Your Vue.js App" />
         </h1>
@@ -35,33 +35,37 @@
                 }}
               </button>
             </h2>
-            <ul
+            <div
               :id="'panelsStayOpen-collapse' + index"
               class="accordion-collapse collapse"
               :aria-labelledby="'panelsStayOpen-heading' + index"
             >
-              <li
-                class="nostyle accordion-content1"
-                v-for="(item, index) in machines[index]['main']"
-                :key="index"
-              >
-                {{ index }} = {{ item }} <br />
-              </li>
-              <li
-                class="nostyle accordion-content1"
-                v-for="(item, index) in machines[index]['counters']"
-                :key="index"
-              >
-                {{ index }} = {{ item }} <br />
-              </li>
-              <li
-                class="nostyle accordion-content1"
-                v-for="(item, index) in machines[index]['plc_state']"
-                :key="index"
-              >
-                {{ index }} = {{ item }} <br />
-              </li>
-            </ul>
+              <span class="accordion-body">
+                <ul>
+                  <li
+                    class="nostyle accordion-content1"
+                    v-for="(item, index) in machines[index]['main']"
+                    :key="index"
+                  >
+                    {{ index }} = <strong>{{ item }}</strong> <br />
+                  </li>
+                  <li
+                    class="nostyle accordion-content1"
+                    v-for="(item, index) in machines[index]['counters']"
+                    :key="index"
+                  >
+                    {{ index }} = <strong>{{ item }}</strong> <br />
+                  </li>
+                  <li
+                    class="nostyle accordion-content1"
+                    v-for="(item, index) in machines[index]['plc_state']"
+                    :key="index"
+                  >
+                    {{ index }} = <strong>{{ item }}</strong> <br />
+                  </li>
+                </ul>
+              </span>
+            </div>
           </div>
         </div>
       </div>
