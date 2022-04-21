@@ -5,7 +5,7 @@
         <h1>
           <AccordionStations msg="Welcome to Your Vue.js App" />
         </h1>
-        <hr />
+        <hr v-if="machines.length > 0" />
         <ul class="input-group col-sm-9">
           <li
             class="nostyle checkboxesAccordion"
@@ -16,14 +16,13 @@
               type="checkbox"
               checked="checked"
               :id="'chkbx' + machines[index]['main']['id']"
+              :value="checkedMachines[index]"
               v-model="checkedMachines[index]"
             />
             {{ machines[index]["main"]["id"] }}
           </li>
         </ul>
-        {{ checkedMachines }}
-        {{ machineState }}
-        <hr />
+        <hr v-if="machines.length > 0" />
         <br />
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <div
@@ -140,27 +139,28 @@ export default {
           machineState.push(String(y));
         }
         //console.log(machineState);
-        console.log("machineState");
+        //console.log("machineState");
         this.machineState = machineState;
       }, interval);
     },
     checkedIds() {
-      this.checkedMachines = new Array(this.machines.length).fill(true);
-      console.log(this.checkedMachines);
+      for (let i = 0; i < 30; i++) {
+        this.checkedMachines.push(true);
+      }
     },
     getProduct() {
       const path =
         "http://192.168.100.100/terminal/markstation/get_product_list";
       axios.get(path).then((res) => {
         this.productList = res.data;
-        console.log(res.data);
+        //console.log(res.data);
       });
     },
   },
   created() {
     this.getProduct();
-    this.checkedIds();
     this.getIds(3000);
+    this.checkedIds();
   },
 };
 </script>
