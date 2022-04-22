@@ -120,30 +120,29 @@ export default {
     AccordionStations,
   },
   methods: {
-    getIds(interval) {
-      setInterval(async () => {
-        const f = await fetch(
-          "http://192.168.100.100/terminal/markstation/get_all_stat"
-        );
-        const data = await f.json();
-        //console.log(data);
-        this.machines = data;
-        let machineState = [];
-        for (let i = 0; i < this.machines.length; i++) {
-          let y = null;
-          if (data[i]["plc_state"]["machine_status"] === "1") {
-            y = "greenClass";
-          } else {
-            y = "redClass";
-          }
-          machineState.push(String(y));
+    async getIds() {
+      const f = await fetch(
+        "http://192.168.100.100/terminal/markstation/get_all_stat"
+      );
+      const data = await f.json();
+      //console.log(data);
+      this.machines = data;
+      let machineState = [];
+      for (let i = 0; i < this.machines.length; i++) {
+        let y = null;
+        if (data[i]["plc_state"]["machine_status"] === "1") {
+          y = "greenClass";
+        } else {
+          y = "redClass";
         }
-        //console.log(machineState);
-        //console.log("machineState");
-        this.machineState = machineState;
-      }, interval);
+        machineState.push(String(y));
+      }
+      //console.log(machineState);
+      console.log("machineState");
+      this.machineState = machineState;
     },
     checkedIds() {
+      // Auto checking the checkboxes
       for (let i = 0; i < 30; i++) {
         this.checkedMachines.push(true);
       }
@@ -159,7 +158,10 @@ export default {
   },
   created() {
     this.getProduct();
-    this.getIds(3000);
+    setInterval(async () => {
+      await this.getIds();
+    }, 10000);
+    this.getIds();
     this.checkedIds();
   },
 };
