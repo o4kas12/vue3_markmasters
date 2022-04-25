@@ -11,17 +11,26 @@
           <br />
           <hr />
           <router-link to="/">
-            <button class="nav-button">
+            <button
+              class="btn nav-button btn-secondary"
+              style="border-radius: 0"
+            >
               <div>Розлив</div>
             </button>
           </router-link>
           <router-link to="/history">
-            <button class="nav-button">
+            <button
+              class="btn nav-button btn-secondary"
+              style="border-radius: 0"
+            >
               <div>История</div>
             </button>
           </router-link>
           <router-link to="/products">
-            <button class="nav-button">
+            <button
+              class="btn nav-button btn-secondary"
+              style="border-radius: 0"
+            >
               <div>Продукты</div>
             </button>
           </router-link>

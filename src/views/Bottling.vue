@@ -23,6 +23,18 @@
           </li>
         </ul>
         <hr v-if="machines.length > 0" />
+        <ul class="input-group">
+          <li
+            class="nostyle checkboxesAccordion"
+            v-for="index in 3"
+            v-bind:key="index"
+          >
+            <input type="checkbox" checked="checked" />
+            ЦЕХ
+            {{ index }}
+          </li>
+        </ul>
+        <hr v-if="machines.length > 0" />
         <br />
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <div
@@ -37,6 +49,7 @@
                 :class="{
                   greenClass: machineState[index] === 'greenClass',
                   redClass: machineState[index] === 'redClass',
+                  classOne: machines[index]['main']['id'].includes('A1'),
                 }"
                 type="button"
                 v-if="checkedMachines[index]"
@@ -111,6 +124,7 @@ export default {
     return {
       machines: [],
       checkedMachines: [],
+      checkedZone: [true, true, true],
       productList: [],
       machineState: [],
       machineNames: [],
@@ -152,17 +166,18 @@ export default {
         "http://192.168.100.100/terminal/markstation/get_product_list";
       axios.get(path).then((res) => {
         this.productList = res.data;
-        //console.log(res.data);
+        console.log(res.data);
       });
     },
   },
   created() {
     this.getProduct();
-    setInterval(async () => {
-      await this.getIds();
-    }, 10000);
     this.getIds();
     this.checkedIds();
+    let intervalGetId = setInterval(async () => {
+      await this.getIds();
+    }, 10000);
+    intervalGetId;
   },
 };
 </script>
