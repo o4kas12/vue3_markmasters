@@ -96,6 +96,12 @@ li.nostyle {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     margin-top: 50px;
+    position: relative;
+}
+
+.sb-sidenav-toggled {
+    margin-left: -14rem;
+    transition: margin 0.25s ease-out;
 }
 
 #wrapper {
@@ -109,7 +115,7 @@ a {
 }
 
 .greenClass {
-    background-color: lightgreen!important;
+    background-color: #77e06b!important;
 }
 .redClass {
     background-color: lightcoral!important;
@@ -130,6 +136,18 @@ ul li.checkboxesAccordion {
     width: 7%;
 }
 
+.accordion-button:not(.collapsed) {
+    color: #1c1c21!important;
+}
+
+#sidebarToggle {
+    position: absolute;
+    left: -5px;
+    top: -15px;
+    z-index: 10000;
+    background-color: #8FD4C1;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         width: 6.5rem !important;
@@ -148,6 +166,10 @@ ul li.checkboxesAccordion {
     .main-content {
         padding-left: 0.1rem!important;
         padding-right: 0.1rem!important;
+    }
+    .sb-sidenav-toggled {
+        margin-left: -6.5rem;
+        transition: margin 0.25s ease-in-out;
     }
 }
 

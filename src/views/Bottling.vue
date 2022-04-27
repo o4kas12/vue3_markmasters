@@ -5,37 +5,62 @@
         <h1>
           <AccordionStations msg="Welcome to Your Vue.js App" />
         </h1>
-        <hr v-if="machines.length > 0" />
-        <ul class="input-group col-sm-9">
-          <li
-            class="nostyle checkboxesAccordion"
-            v-for="(item, index) in machines"
-            v-bind:key="index"
+        <!-- <alert :message="message" v-if="showMessage"></alert> /-->
+        <p style="text-align: left">
+          <a
+            class="btn btn-primary"
+            data-bs-toggle="collapse"
+            href="#collapseExample"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
           >
-            <input
-              type="checkbox"
-              checked="checked"
-              :id="'chkbx' + machines[index]['main']['id']"
-              :value="checkedMachines[index]"
-              v-model="checkedMachines[index]"
-            />
-            {{ machines[index]["main"]["id"] }}
-          </li>
-        </ul>
-        <hr v-if="machines.length > 0" />
-        <ul class="input-group">
-          <li
-            class="nostyle checkboxesAccordion"
-            v-for="index in 3"
-            v-bind:key="index"
-          >
-            <input type="checkbox" checked="checked" />
-            ЦЕХ
-            {{ index }}
-          </li>
-        </ul>
-        <hr v-if="machines.length > 0" />
-        <br />
+            Фильтр
+          </a>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <ul class="input-group col-sm-9">
+              <li
+                class="nostyle checkboxesAccordion"
+                v-for="(item, index) in machines"
+                v-bind:key="index"
+              >
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  :id="'chkbx' + machines[index]['main']['id']"
+                  :value="checkedMachines[index]"
+                  v-model="checkedMachines[index]"
+                />
+                {{ machines[index]["main"]["id"] }}
+              </li>
+              {{
+                checkedMachines
+              }}
+            </ul>
+            <hr v-if="machines.length > 0" />
+            <ul class="input-group">
+              <li
+                class="nostyle checkboxesAccordion"
+                v-for="index in 3"
+                v-bind:key="index"
+              >
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  :value="checkedZone[index]"
+                  v-model="checkedZone[index]"
+                />
+                ЦЕХ
+                {{ index }}
+              </li>
+              {{
+                checkedZone
+              }}
+            </ul>
+          </div>
+        </div>
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <div
             class="accordion-item"
@@ -58,20 +83,26 @@
                 aria-expanded="false"
                 :aria-controls="'panelsStayOpen-collapse' + index"
               >
-                {{ machines[index]["main"]["id"] }}
-                {{
-                  productList[
-                    productList
-                      .map((x) => x.cod_gp)
-                      .indexOf(
-                        String(machines[index]["main"]["current_cod_gp"]),
-                        0
-                      )
-                  ].name_gp
-                }}
-                <strong>{{
-                  machines[index]["plc_state"]["message_from_plc"]
+                <span style="width: inherit">
+                  {{ machines[index]["main"]["id"] }}
+                  {{
+                    productList[
+                      productList
+                        .map((x) => x.cod_gp)
+                        .indexOf(
+                          String(machines[index]["main"]["current_cod_gp"]),
+                          0
+                        )
+                    ].name_gp
+                  }}
+                  &nbsp;
+                </span>
+                <strong class="AccordionHeaderState">{{
+                  String(
+                    machines[index]["plc_state"]["message_from_plc"]
+                  ).split(";")[1]
                 }}</strong>
+                &nbsp;
               </button>
             </h2>
             <div
@@ -115,16 +146,20 @@
 <script>
 // @ is an alias to /src
 import AccordionStations from "@/components/AccordionStations.vue";
+// import Alert from "../components/Alert.vue";
 import axios from "axios";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Bottling",
+  props: ["intervalGetId"],
   data() {
     return {
+      message: "",
+      showMessage: false,
       machines: [],
       checkedMachines: [],
-      checkedZone: [true, true, true],
+      checkedZone: [null, true, true, true],
       productList: [],
       machineState: [],
       machineNames: [],
@@ -148,6 +183,11 @@ export default {
           y = "greenClass";
         } else {
           y = "redClass";
+          this.showMessage = true;
+          this.message =
+            data[i]["main"]["id"] +
+            " " +
+            String(data[i]["plc_state"]["message_from_plc"]).split(";")[1];
         }
         machineState.push(String(y));
       }
@@ -174,10 +214,15 @@ export default {
     this.getProduct();
     this.getIds();
     this.checkedIds();
+  },
+  mounted() {
     let intervalGetId = setInterval(async () => {
       await this.getIds();
     }, 10000);
     intervalGetId;
+  },
+  unmounted() {
+    clearInterval(this.intervalGetId);
   },
 };
 </script>

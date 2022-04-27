@@ -34,17 +34,47 @@
               <div>Продукты</div>
             </button>
           </router-link>
+          <router-link to="/manage">
+            <button
+              class="btn nav-button btn-secondary"
+              style="border-radius: 0"
+            >
+              <div>Settings</div>
+            </button>
+          </router-link>
         </div>
       </div>
     </nav>
     <div class="d-flex flex-column" id="content-wrapper">
       <div id="content>">
         <div class="container-fluid main-content">
+          <button class="btn btn-lg" id="sidebarToggle">|||</button>
           <router-view />
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+// eslint-disable-next-line
+window.addEventListener("DOMContentLoaded", (event) => {
+  const sidebarToggle = document.body.querySelector("#sidebarToggle");
+  if (sidebarToggle) {
+    // Uncomment Below to persist sidebar toggle between refreshes
+    // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+    //     document.body.classList.toggle('sb-sidenav-toggled');
+    // }
+    sidebarToggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      document.body.classList.toggle("sb-sidenav-toggled");
+      localStorage.setItem(
+        "sb|sidebar-toggle",
+        document.body.classList.contains("sb-sidenav-toggled")
+      );
+    });
+  }
+});
+</script>
 
 <style src="./assets/style.css"></style>
