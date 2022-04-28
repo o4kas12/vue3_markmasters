@@ -147,6 +147,7 @@
 // @ is an alias to /src
 import AccordionStations from "@/components/AccordionStations.vue";
 // import Alert from "../components/Alert.vue";
+import VueSpeedometer from "vue-speedometer";
 import axios from "axios";
 
 export default {
@@ -167,7 +168,10 @@ export default {
   },
   components: {
     AccordionStations,
+    // eslint-disable-next-line vue/no-unused-components
+    VueSpeedometer,
   },
+  template: "<vue-speedometer value='333'/>",
   methods: {
     async getIds() {
       const f = await fetch(

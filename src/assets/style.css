@@ -104,6 +104,10 @@ li.nostyle {
     transition: margin 0.25s ease-out;
 }
 
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: 0;
+}
+
 #wrapper {
     display: flex;
 }
@@ -141,6 +145,7 @@ ul li.checkboxesAccordion {
 }
 
 #sidebarToggle {
+    box-shadow: none;
     position: absolute;
     left: -5px;
     top: -15px;
