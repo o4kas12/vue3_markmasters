@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">working</div>
+  <div id="speedometer"></div>
 </template>
 
 <script>
@@ -8,5 +8,3 @@ export default {
   name: "manage",
 };
 </script>
-
-<style scoped></style>

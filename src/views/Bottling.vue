@@ -147,14 +147,18 @@
 // @ is an alias to /src
 import AccordionStations from "@/components/AccordionStations.vue";
 // import Alert from "../components/Alert.vue";
-import VueSpeedometer from "vue-speedometer";
 import axios from "axios";
+import { onUnmounted } from "vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Bottling",
   props: ["intervalGetId"],
   data() {
+    onUnmounted(() => {
+      console.log("unmounted");
+      clearInterval(this.interValue);
+    });
     return {
       message: "",
       showMessage: false,
@@ -164,14 +168,12 @@ export default {
       productList: [],
       machineState: [],
       machineNames: [],
+      interValue: null,
     };
   },
   components: {
     AccordionStations,
-    // eslint-disable-next-line vue/no-unused-components
-    VueSpeedometer,
   },
-  template: "<vue-speedometer value='333'/>",
   methods: {
     async getIds() {
       const f = await fetch(
@@ -199,6 +201,7 @@ export default {
       console.log("machineState");
       this.machineState = machineState;
     },
+
     checkedIds() {
       // Auto checking the checkboxes
       for (let i = 0; i < 30; i++) {
@@ -210,23 +213,23 @@ export default {
         "http://192.168.100.100/terminal/markstation/get_product_list";
       axios.get(path).then((res) => {
         this.productList = res.data;
-        console.log(res.data);
+        console.log("getProduct");
+        this.getIds();
       });
+    },
+    interVal() {
+      if (this.interValue) return;
+      const interValue = setInterval(() => {
+        this.getIds();
+      }, 10000);
+      this.interValue = interValue;
     },
   },
   created() {
+    console.log("created");
     this.getProduct();
-    this.getIds();
     this.checkedIds();
-  },
-  mounted() {
-    let intervalGetId = setInterval(async () => {
-      await this.getIds();
-    }, 10000);
-    intervalGetId;
-  },
-  unmounted() {
-    clearInterval(this.intervalGetId);
+    this.interVal();
   },
 };
 </script>

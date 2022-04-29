@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapper">
+  <div class="d-flex" id="wrapper">
     <nav
       class="navbar navbar-dark align-items-start sidebar accordion bg-gradient-primary p-0"
     >
