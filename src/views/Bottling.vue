@@ -10,7 +10,7 @@
           <a
             class="btn btn-primary"
             data-bs-toggle="collapse"
-            href="#collapseExample"
+            href="#collapseID"
             role="button"
             aria-expanded="false"
             aria-controls="collapseExample"
@@ -18,8 +18,9 @@
             Фильтр
           </a>
         </p>
-        <div class="collapse" id="collapseExample">
+        <div class="collapse" id="collapseID">
           <div class="card card-body">
+            <!--
             <ul class="input-group col-sm-9">
               <li
                 class="nostyle checkboxesAccordion"
@@ -33,13 +34,13 @@
                   :value="checkedMachines[index]"
                   v-model="checkedMachines[index]"
                 />
-                {{ machines[index]["main"]["id"] }}
               </li>
               {{
                 checkedMachines
               }}
             </ul>
             <hr v-if="machines.length > 0" />
+            -->
             <ul class="input-group">
               <li
                 class="nostyle checkboxesAccordion"
@@ -55,9 +56,6 @@
                 ЦЕХ
                 {{ index }}
               </li>
-              {{
-                checkedZone
-              }}
             </ul>
           </div>
         </div>
@@ -77,7 +75,10 @@
                   classOne: machines[index]['main']['id'].includes('A1'),
                 }"
                 type="button"
-                v-if="checkedMachines[index]"
+                v-if="
+                  //checkedMachines[index] ||
+                  checkedZone[String(machines[index]['main']['id']).slice(1, 2)]
+                "
                 data-bs-toggle="collapse"
                 :data-bs-target="'#panelsStayOpen-collapse' + index"
                 aria-expanded="false"

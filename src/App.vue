@@ -9,7 +9,7 @@
             <img alt="Vue logo" class="logoPMZ" src="./assets/logo_pmz.png" />
           </a>
           <br />
-          <hr />
+          <br />
           <router-link to="/">
             <button
               class="btn nav-button btn-secondary"
