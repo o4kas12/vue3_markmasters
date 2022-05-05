@@ -56,6 +56,15 @@
                 ЦЕХ
                 {{ index }}
               </li>
+              <li class="nostyle checkboxesAccordion">
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  :value="checkedZone[9]"
+                  v-model="checkedZone[9]"
+                />
+                TEST
+              </li>
             </ul>
           </div>
         </div>

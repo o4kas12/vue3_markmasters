@@ -3,6 +3,8 @@ import Bottling from "@/views/Bottling";
 import history from "@/views/history";
 import products from "@/views/products";
 import Manage from "@/views/Manage";
+import Protected from "@/components/Protected";
+import storageHelper from "storage-helper";
 
 const routes = [
   {
@@ -14,6 +16,9 @@ const routes = [
     path: "/manage",
     name: "Manage",
     component: Manage,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/history",
@@ -24,6 +29,11 @@ const routes = [
     path: "/products",
     name: "products",
     component: products,
+  },
+  {
+    path: "/protected",
+    name: "protected",
+    component: Protected,
   },
   {
     path: "/about",
@@ -42,3 +52,10 @@ const router = createRouter({
 });
 
 export default router;
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    if (!storageHelper.getItem("user-password")) next("/protected");
+    else next();
+  } else next();
+});
