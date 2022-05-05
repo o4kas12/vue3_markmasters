@@ -144,6 +144,10 @@ ul li.checkboxesAccordion {
     color: #1c1c21!important;
 }
 
+.accordion-item {
+    border-bottom: 1px solid!important;
+}
+
 #sidebarToggle {
     box-shadow: none;
     position: absolute;
@@ -152,6 +156,8 @@ ul li.checkboxesAccordion {
     z-index: 10000;
     background-color: #8FD4C1;
 }
+
+
 
 @media (max-width: 768px) {
     .sidebar {

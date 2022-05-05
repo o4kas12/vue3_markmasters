@@ -165,7 +165,7 @@ export default {
       showMessage: false,
       machines: [],
       checkedMachines: [],
-      checkedZone: [null, true, true, true],
+      checkedZone: [],
       productList: [],
       machineState: [],
       machineNames: [],
@@ -207,6 +207,7 @@ export default {
       // Auto checking the checkboxes
       for (let i = 0; i < 30; i++) {
         this.checkedMachines.push(true);
+        this.checkedZone.push(true);
       }
     },
     getProduct() {
