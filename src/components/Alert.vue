@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative">
     <div
-      style="position: fixed; bottom: 0; right: 0"
+      style="position: relative; bottom: 0; right: 0"
       class="alert"
       :class="{ 'alert-danger': true, 'alert-success': false }"
       role="alert"

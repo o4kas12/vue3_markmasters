@@ -81,7 +81,7 @@
                 :class="{
                   greenClass: machineState[index] === 'greenClass',
                   redClass: machineState[index] === 'redClass',
-                  classOne: machines[index]['main']['id'].includes('A1'),
+                  greyClass: machineState[index] === 'greyClass',
                 }"
                 type="button"
                 v-if="
@@ -195,7 +195,9 @@ export default {
       let machineState = [];
       for (let i = 0; i < this.machines.length; i++) {
         let y = null;
-        if (data[i]["plc_state"]["machine_status"] === "1") {
+        if (data[i]["options"]["last_seen_timeout"] > 90) {
+          y = "greyClass";
+        } else if (data[i]["plc_state"]["machine_status"] === "1") {
           y = "greenClass";
         } else {
           y = "redClass";

@@ -12,7 +12,7 @@
                 class="form-control password-field"
                 type="password"
                 name="password"
-                v-model.trim="password"
+                v-model.trim="psphrs"
               />
               <span class="error help-block"></span>
             </div>
@@ -37,14 +37,14 @@ export default {
   data() {
     return {
       error: null,
-      password: null,
+      psphrs: null,
     };
   },
   methods: {
     validateBeforeSubmit() {
-      if (this.password === "61325") {
+      if (this.psphrs === "61325") {
         this.error = false;
-        storageHelper.setItem("user-password", this.password);
+        storageHelper.setItem("user-password", this.psphrs);
         // eslint-disable-next-line no-undef
         router.push("manage");
       } else {

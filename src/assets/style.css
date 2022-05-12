@@ -124,6 +124,9 @@ a {
 .redClass {
     background-color: lightcoral!important;
 }
+.greyClass {
+    background-color: grey!important;
+}
 
 .btn .nav-item {
     border-radius: 0!important;
@@ -138,6 +141,10 @@ div.nav-item + a.router-link-active {
 
 ul li.checkboxesAccordion {
     width: 7%;
+}
+
+ul li.checkboxesManage {
+    width :25%
 }
 
 .accordion-button:not(.collapsed) {
@@ -191,6 +198,9 @@ ul li.checkboxesAccordion {
     ul li.checkboxesAccordion {
         width: 10%;
     }
+    ul li.checkboxesManage {
+        width :33%
+    }
 }
 
 @media (max-width: 1000px) {
@@ -199,6 +209,9 @@ ul li.checkboxesAccordion {
     }
     ul li.checkboxesAccordion {
         width: 25%;
+    }
+    ul li.checkboxesManage {
+        width :50%
     }
 }
 
