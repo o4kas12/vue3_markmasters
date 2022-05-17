@@ -62,6 +62,29 @@
     </div>
   </div>
   <br />
+  <a class="btn btn-warning" style="margin: 5px" @click="resetStatistics"
+    >Сброс статистики по линиям</a
+  >
+  <a
+    style="text-decoration: none"
+    class="status redText"
+    v-if="showStatus"
+    :class="{ greenText: status === 'ok' }"
+  >
+    {{ status }}
+  </a>
+  <br />
+  <a
+    style="margin: 5px"
+    href="http://192.168.100.100/terminal/markstation/get_all_stat"
+    >Статистика по станциям</a
+  >
+  <a
+    style="margin: 5px"
+    href="http://192.168.100.100/terminal/markstation/get_product_list"
+    >Коды и наименования продуктов</a
+  >
+  <br />
   <template v-if="showMessage">
     <br />
     <alert
@@ -93,6 +116,8 @@ export default {
       },
       message: [],
       showMessage: false,
+      status: [],
+      showStatus: false,
     };
   },
   components: {
@@ -181,6 +206,16 @@ export default {
       let inputCommand = document.getElementById("input-field");
       inputCommand.value = "";
       this.showMessage = false;
+    },
+    resetStatistics() {
+      const path = "http://192.168.100.100/terminal/markstation/reset_stat";
+      axios.get(path).then((res) => {
+        this.status = String(res.data);
+        this.showStatus = true;
+        setTimeout(() => {
+          this.showStatus = false;
+        }, 5000);
+      });
     },
   },
   created() {

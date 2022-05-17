@@ -23,16 +23,6 @@ nav a.router-link-exact-active {
     width: 150px;
 }
 
-ul li {
-    float: left;
-    width: 33%;
-    text-align: left;
-}
-
-li.nostyle {
-    list-style-type: none;
-}
-
 .p-0 {
     padding: 0 !important;
 }
@@ -118,16 +108,6 @@ a {
     font-size: large;
 }
 
-.greenClass {
-    background-color: #77e06b!important;
-}
-.redClass {
-    background-color: lightcoral!important;
-}
-.greyClass {
-    background-color: grey!important;
-}
-
 .btn .nav-item {
     border-radius: 0!important;
 }
@@ -137,14 +117,6 @@ div.nav-item + a.router-link-active {
     text-decoration: #1c1c21;
     background-color: white;
     min-width: 100%;
-}
-
-ul li.checkboxesAccordion {
-    width: 7%;
-}
-
-ul li.checkboxesManage {
-    width :25%
 }
 
 .accordion-button:not(.collapsed) {
@@ -163,7 +135,6 @@ ul li.checkboxesManage {
     z-index: 10000;
     background-color: #8FD4C1;
 }
-
 
 
 @media (max-width: 768px) {
@@ -220,4 +191,40 @@ ul li.checkboxesManage {
     .container-sm, .container-xl, .container-xxl {
         max-width: 1380px;
     }
+}
+
+ul li {
+    float: left;
+    width: 33%;
+    text-align: left;
+}
+
+li.nostyle {
+    list-style-type: none;
+}
+
+ul li.checkboxesAccordion {
+    width: 7%;
+}
+
+ul li.checkboxesManage {
+    width :25%
+}
+
+.greenClass {
+    background-color: #77e06b!important;
+}
+.redClass {
+    background-color: lightcoral!important;
+}
+.greyClass {
+    background-color: grey!important;
+}
+
+.greenText {
+    color: green!important;
+}
+
+.redText {
+    color: red;
 }

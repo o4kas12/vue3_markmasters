@@ -57,6 +57,10 @@
 </template>
 
 <script>
+export default {
+  name: "App",
+};
+
 // eslint-disable-next-line
 window.addEventListener("DOMContentLoaded", (event) => {
   const sidebarToggle = document.body.querySelector("#sidebarToggle");
