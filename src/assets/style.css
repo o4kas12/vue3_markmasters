@@ -19,6 +19,42 @@ nav a.router-link-exact-active {
     color: #42b983;
 }
 
+ul li {
+    float: left;
+    width: 33%;
+    text-align: left;
+}
+
+li.nostyle {
+    list-style-type: none;
+}
+
+ul li.checkboxesAccordion {
+    width: 7%;
+}
+
+ul li.checkboxesManage {
+    width :25%
+}
+
+.greenClass {
+    background-color: #77e06b!important;
+}
+.redClass {
+    background-color: lightcoral!important;
+}
+.greyClass {
+    background-color: grey!important;
+}
+
+.greenText {
+    color: green!important;
+}
+
+.redText {
+    color: red;
+}
+
 .logoPMZ {
     width: 150px;
 }
@@ -191,40 +227,4 @@ div.nav-item + a.router-link-active {
     .container-sm, .container-xl, .container-xxl {
         max-width: 1380px;
     }
-}
-
-ul li {
-    float: left;
-    width: 33%;
-    text-align: left;
-}
-
-li.nostyle {
-    list-style-type: none;
-}
-
-ul li.checkboxesAccordion {
-    width: 7%;
-}
-
-ul li.checkboxesManage {
-    width :25%
-}
-
-.greenClass {
-    background-color: #77e06b!important;
-}
-.redClass {
-    background-color: lightcoral!important;
-}
-.greyClass {
-    background-color: grey!important;
-}
-
-.greenText {
-    color: green!important;
-}
-
-.redText {
-    color: red;
 }

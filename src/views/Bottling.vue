@@ -68,7 +68,7 @@
             </ul>
           </div>
         </div>
-        <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion" id="accordionPanelsStayOpen">
           <div
             class="accordion-item"
             :id="machines[index]['main']['id']"

@@ -215,6 +215,11 @@ export default {
         setTimeout(() => {
           this.showStatus = false;
         }, 5000);
+        let intervalId = setInterval(this.getIds, 10000);
+        setTimeout(() => {
+          //console.log("interval cleared");
+          clearInterval(intervalId);
+        }, 61000);
       });
     },
   },
