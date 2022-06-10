@@ -1,23 +1,26 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
-        <h1>
-          <AccordionStations msg="Welcome to Your Vue.js App" />
-        </h1>
-        <!-- <alert :message="message" v-if="showMessage"></alert> /-->
-        <p style="text-align: left">
-          <a
-            class="btn btn-primary"
-            data-bs-toggle="collapse"
-            href="#collapseID"
-            role="button"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-          >
-            Фильтр
-          </a>
-        </p>
+      <div class="col-sm-12" style="margin-top: -75px">
+        <div style="height: 50px; display: -webkit-box; margin: auto">
+          <p style="text-align: left; margin: 4px 72px">
+            <a
+              class="btn btn-primary"
+              data-bs-toggle="collapse"
+              href="#collapseID"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              style="position: absolute"
+            >
+              Фильтр
+            </a>
+          </p>
+          <h1 style="margin: 0 21px 0">
+            <AccordionStations />
+          </h1>
+          <!-- <alert :message="message" v-if="showMessage"></alert> /-->
+        </div>
         <div class="collapse" id="collapseID">
           <div class="card card-body">
             <!--

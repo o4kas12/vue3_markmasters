@@ -1,56 +1,51 @@
 <template>
   <div class="d-flex" id="wrapper">
-    <nav
-      class="navbar navbar-dark align-items-start sidebar accordion bg-gradient-primary p-0"
-    >
-      <div class="container-fluid d-flex flex-column p-0">
-        <div class="w-100">
-          <a href="/" class="logoCard">
-            <img alt="Vue logo" class="logoPMZ" src="./assets/logo_pmz.png" />
-          </a>
-          <br />
-          <br />
-          <router-link to="/">
-            <button
-              class="btn nav-button btn-secondary"
-              style="border-radius: 0"
-            >
-              <div>Розлив</div>
-            </button>
-          </router-link>
-          <router-link to="/history">
-            <button
-              class="btn nav-button btn-secondary"
-              style="border-radius: 0"
-            >
-              <div>История</div>
-            </button>
-          </router-link>
-          <router-link to="/products">
-            <button
-              class="btn nav-button btn-secondary"
-              style="border-radius: 0"
-            >
-              <div>Продукты</div>
-            </button>
-          </router-link>
-          <router-link to="/manage">
-            <button
-              class="btn nav-button btn-secondary"
-              style="border-radius: 0"
-            >
-              <div>Settings</div>
-            </button>
-          </router-link>
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+      <br />
+      <a href="/" class="logoCard">
+        <img alt="Vue logo" class="logoPMZ w-75" src="./assets/logo_pmz.png" />
+      </a>
+      <div class="list-group list-group-flush">
+        <br />
+        <router-link
+          to="/"
+          class="list-group-item list-group-item-action list-group-item-light p-3"
+          >Розлив</router-link
+        >
+        <router-link
+          to="/history"
+          class="list-group-item list-group-item-action list-group-item-light p-3"
+          >История</router-link
+        >
+        <router-link
+          to="/products"
+          class="list-group-item list-group-item-action list-group-item-light p-3"
+          >Продукты</router-link
+        >
+        <router-link
+          to="/manage"
+          class="list-group-item list-group-item-action list-group-item-light p-3"
+          >Settings</router-link
+        >
+      </div>
+    </div>
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+      <!-- Top navigation-->
+      <div class="navbar navbar-expand-lg navbar-light border-bottom">
+        <div class="container-fluid">
+          <button class="btn btn-primary" id="sidebarToggle">МЕНЮ</button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarSupportedContent"
+          ></div>
         </div>
       </div>
-    </nav>
-    <div class="d-flex flex-column" id="content-wrapper">
-      <div id="content>">
-        <div class="container-fluid main-content">
-          <button class="btn btn-lg" id="sidebarToggle">|||</button>
-          <router-view />
-        </div>
+      <!-- Page content-->
+      <div class="container-fluid">
+        <br />
+        <router-view />
       </div>
     </div>
   </div>
@@ -61,14 +56,16 @@ export default {
   name: "App",
 };
 
-// eslint-disable-next-line
+// eslint-disable-next-line no-unused-vars
 window.addEventListener("DOMContentLoaded", (event) => {
+  // Toggle the side navigation
   const sidebarToggle = document.body.querySelector("#sidebarToggle");
   if (sidebarToggle) {
     // Uncomment Below to persist sidebar toggle between refreshes
     // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
     //     document.body.classList.toggle('sb-sidenav-toggled');
     // }
+    // eslint-disable-next-line no-shadow
     sidebarToggle.addEventListener("click", (event) => {
       event.preventDefault();
       document.body.classList.toggle("sb-sidenav-toggled");
