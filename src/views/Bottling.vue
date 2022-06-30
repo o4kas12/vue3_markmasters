@@ -96,6 +96,17 @@
                 aria-expanded="false"
                 :aria-controls="'panelsStayOpen-collapse' + index"
               >
+                <div class="speedometerDiv">
+                  <vue-speedometer
+                    :maxSegmentLabels="0"
+                    :segments="50"
+                    :value="machinesProdValue[index]"
+                    :maxValue="machinesMaxProdValue[index]"
+                    :width="100"
+                    :height="60"
+                  />
+                </div>
+
                 <span style="width: inherit">
                   {{ machines[index]["main"]["id"] }}
                   {{
@@ -110,6 +121,7 @@
                   }}
                   &nbsp;
                 </span>
+
                 <strong class="AccordionHeaderState">{{
                   String(
                     machines[index]["plc_state"]["message_from_plc"]
@@ -124,6 +136,14 @@
               :aria-labelledby="'panelsStayOpen-heading' + index"
             >
               <span class="accordion-body" v-if="checkedMachines[index]">
+                <div class="speedometerDivInner">
+                  <vue-speedometer
+                    :maxSegmentLabels="0"
+                    :segments="100"
+                    :value="machinesProdValue[index]"
+                    :maxValue="machinesMaxProdValue[index]"
+                  />
+                </div>
                 <ul>
                   <li
                     class="nostyle accordion-content1"
@@ -159,6 +179,7 @@
 <script>
 // @ is an alias to /src
 import AccordionStations from "@/components/AccordionStations.vue";
+import VueSpeedometer from "vue-speedometer";
 // import Alert from "../components/Alert.vue";
 import axios from "axios";
 import { onUnmounted } from "vue";
@@ -182,10 +203,13 @@ export default {
       machineState: [],
       machineNames: [],
       interValue: null,
+      machinesMaxProdValue: [],
+      machinesProdValue: [],
     };
   },
   components: {
     AccordionStations,
+    VueSpeedometer,
   },
   methods: {
     async getIds() {
@@ -211,8 +235,14 @@ export default {
             String(data[i]["plc_state"]["message_from_plc"]).split(";")[1];
         }
         machineState.push(String(y));
+        this.machinesMaxProdValue.push(
+          this.machines[i]["options"]["max_items_per_minute"]
+        );
+        this.machinesProdValue.push(
+          this.machines[i]["options"]["items_per_minute"]
+        );
       }
-      //console.log(machineState);
+      //console.log("machineState = " + machineState);
       console.log("machineState");
       this.machineState = machineState;
     },

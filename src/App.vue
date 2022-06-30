@@ -19,9 +19,9 @@
           >История</router-link
         >
         <router-link
-          to="/products"
+          to="/dashboard"
           class="list-group-item list-group-item-action list-group-item-light p-3"
-          >Продукты</router-link
+          >Dashboard</router-link
         >
         <router-link
           to="/manage"

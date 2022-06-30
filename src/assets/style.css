@@ -46,6 +46,15 @@
     background-color: #545b62;
 }
 
+.speedometerDiv {
+    margin-top: -30px;
+    margin-bottom: -10px;
+}
+
+.speedometerDivInner {
+    margin-bottom: -100px;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         width: 6.5rem !important;
