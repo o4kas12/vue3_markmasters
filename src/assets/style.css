@@ -55,6 +55,23 @@
     margin-bottom: -100px;
 }
 
+.itemsPerMinute {
+    min-width: 30px;
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+.accordion-button {
+    border: none!important;
+    color:black!important;
+    box-shadow: 0 0 0 0!important;
+}
+
+strong.AccordionHeaderState {
+    min-width: 86px;
+    text-align: end;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         width: 6.5rem !important;

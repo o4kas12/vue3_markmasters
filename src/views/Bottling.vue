@@ -96,14 +96,19 @@
                 aria-expanded="false"
                 :aria-controls="'panelsStayOpen-collapse' + index"
               >
+                <div class="itemsPerMinute">
+                  {{ machinesProdValue[index] }}
+                </div>
                 <div class="speedometerDiv">
                   <vue-speedometer
                     :maxSegmentLabels="0"
-                    :segments="50"
+                    :segments="5"
+                    :needleHeightRatio="0.6"
                     :value="machinesProdValue[index]"
                     :maxValue="machinesMaxProdValue[index]"
                     :width="100"
                     :height="60"
+                    ringWidth="30"
                   />
                 </div>
 
@@ -220,6 +225,8 @@ export default {
       //console.log(data);
       this.machines = data;
       let machineState = [];
+      let machinesMaxProdValue = [];
+      let machinesProdValue = [];
       for (let i = 0; i < this.machines.length; i++) {
         let y = null;
         if (data[i]["options"]["last_seen_timeout"] > 90) {
@@ -235,16 +242,17 @@ export default {
             String(data[i]["plc_state"]["message_from_plc"]).split(";")[1];
         }
         machineState.push(String(y));
-        this.machinesMaxProdValue.push(
+        machinesMaxProdValue.push(
           this.machines[i]["options"]["max_items_per_minute"]
         );
-        this.machinesProdValue.push(
-          this.machines[i]["options"]["items_per_minute"]
-        );
+        machinesProdValue.push(this.machines[i]["options"]["items_per_minute"]);
       }
       //console.log("machineState = " + machineState);
       console.log("machineState");
       this.machineState = machineState;
+      this.machinesMaxProdValue = machinesMaxProdValue;
+      this.machinesProdValue = machinesProdValue;
+      console.log(this.machinesProdValue);
     },
 
     checkedIds() {
