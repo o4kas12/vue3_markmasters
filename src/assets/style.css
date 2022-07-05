@@ -201,3 +201,19 @@ ul li.checkboxesManage {
         width :50%
     }
 }
+
+
+/* dashboard  */
+
+#customCardDashboard {
+    min-width: 14rem;
+    height: 14rem;
+    margin: auto;
+}
+
+
+@media (max-width: 1343px) {
+    #customCardDashboard {
+        min-width: 9rem!important;
+    }
+}

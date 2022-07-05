@@ -1,14 +1,19 @@
 <template>
-  <strong>В разработке</strong>
-  <div>
-    <div>
+  <div class="card" style="width: 15rem">
+    <div class="card-body">
       <vue-speedometer
         :maxSegmentLabels="0"
-        :segments="75"
-        textColor="${textColor}"
-        :value="33"
-        :maxValue="50"
+        :segments="5"
+        :needleHeightRatio="0.6"
+        :value="30"
+        :maxValue="100"
+        :width="100"
+        :height="60"
+        :ringWidth="30"
       />
+      <h5 class="card-title">A1-01</h5>
+      <p class="card-text">Молоко пастер.2,5% ТФА 0,9л (12)</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
 </template>
@@ -18,8 +23,9 @@ import VueSpeedometer from "vue-speedometer";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "history.vue",
-  components: { VueSpeedometer },
-  template: `<vue-speedometer />`,
+  components: {
+    VueSpeedometer,
+  },
 };
 </script>
 

@@ -108,7 +108,7 @@
                     :maxValue="machinesMaxProdValue[index]"
                     :width="100"
                     :height="60"
-                    ringWidth="30"
+                    :ringWidth="30"
                   />
                 </div>
 
@@ -252,7 +252,7 @@ export default {
       this.machineState = machineState;
       this.machinesMaxProdValue = machinesMaxProdValue;
       this.machinesProdValue = machinesProdValue;
-      console.log(this.machinesProdValue);
+      //console.log(this.machinesProdValue);
     },
 
     checkedIds() {
