@@ -1,15 +1,16 @@
 <template>
-  <div aria-live="polite" aria-atomic="true" class="position-relative">
-    <div class="toast-container top-0 end-0 p-3">
+  <div aria-live="polite" aria-atomic="true" class="toast-alerts">
+    <div class="toast-container">
       <div
-        class="toast show bg-light"
+        class="toast bg-light"
+        id="toastLive"
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
       >
         <div class="toast-header">
           <strong class="me-auto">Bootstrap</strong>
-          <small>11 mins ago</small>
+          <small>just now</small>
           <button
             type="button"
             class="btn-close"
@@ -29,14 +30,7 @@
       :key="index"
       style="min-width: 14rem; margin: auto"
     >
-      <div
-        class="card-body"
-        :class="{
-          greenClass: machineState[index] === 'greenClass',
-          redClass: machineState[index] === 'redClass',
-          greyClass: machineState[index] === 'greyClass',
-        }"
-      >
+      <div class="card-body">
         <vue-speedometer
           :maxSegmentLabels="0"
           :segments="5"
@@ -57,7 +51,16 @@
             ].name_gp
           }}
         </p>
-        <a class="btn btn-primary" @click="toastMethod">Go somewhere</a>
+        <a
+          class="btn btn-primary"
+          :class="{
+            greenClass: machineState[index] === 'greenClass',
+            redClass: machineState[index] === 'redClass',
+            greyClass: machineState[index] === 'greyClass',
+          }"
+          @click="toastMethod"
+          >Go somewhere</a
+        >
       </div>
     </div>
   </div>
@@ -83,6 +86,7 @@ export default {
     return {
       message: "",
       showMessage: false,
+      machineErrors: [],
       machines: [],
       checkedMachines: [],
       checkedZone: [],
@@ -160,9 +164,9 @@ export default {
       this.interValue = interValue;
     },
     toastMethod() {
-      Array.from(document.querySelectorAll(".toast")).forEach(
-        (toastNode) => new Toast(toastNode)
-      );
+      const toastLive = document.getElementById("toastLive");
+      const toast = new Toast(toastLive);
+      toast.show();
       console.log("hello");
     },
   },
