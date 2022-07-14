@@ -128,6 +128,9 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     #sidebar-wrapper {
         margin-left: 0;
     }
+    #fakeSidebar {
+        margin-left: 0;
+    }
 
     #page-content-wrapper {
         min-width: 0;

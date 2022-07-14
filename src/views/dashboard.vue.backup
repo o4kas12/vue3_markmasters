@@ -70,7 +70,7 @@
 // @ is an alias to /src
 import VueSpeedometer from "vue-speedometer";
 import axios from "axios";
-import { Toast } from "bootstrap/dist/js/bootstrap.esm.js";
+import { Toast } from "bootstrap/dist/js/bootstrap.esm.min";
 import { onUnmounted } from "vue";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names

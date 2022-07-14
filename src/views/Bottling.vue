@@ -78,7 +78,10 @@
             v-for="(item, index) in machines"
             v-bind:key="index"
           >
-            <h2 class="accordion-header" :id="machines[index]['main']['id']">
+            <h2
+              class="accordion-header"
+              :id="'header_' + machines[index]['main']['id']"
+            >
               <button
                 class="accordion-button collapsed"
                 :class="{
