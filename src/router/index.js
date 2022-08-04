@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Bottling from "@/views/Bottling";
-import history from "@/views/history";
+import statistics from "@/views/statistics";
 import dashboard from "@/views/dashboard";
 import Manage from "@/views/Manage";
 import Protected from "@/components/Protected";
@@ -21,9 +21,9 @@ const routes = [
     },
   },
   {
-    path: "/history",
-    name: "History",
-    component: history,
+    path: "/statistics",
+    name: "Statistics",
+    component: statistics,
   },
   {
     path: "/dashboard",

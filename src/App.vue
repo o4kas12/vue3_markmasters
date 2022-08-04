@@ -20,9 +20,9 @@
             >Розлив</router-link
           >
           <router-link
-            to="/history"
+            to="/statistics"
             class="list-group-item list-group-item-action list-group-item-light p-3"
-            >История</router-link
+            >Статистика</router-link
           >
           <router-link
             to="/dashboard"

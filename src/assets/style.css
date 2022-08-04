@@ -124,6 +124,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: 0;
 }
 
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none!important;
+}
+
 @media (min-width: 768px) {
     #sidebar-wrapper {
         margin-left: 0;
