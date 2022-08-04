@@ -18,7 +18,9 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="toast-body">Hello, world! This is a toast message.</div>
+        <div class="toast-body bg-info">
+          Hello, world! This is a toast message.
+        </div>
       </div>
     </div>
   </div>
