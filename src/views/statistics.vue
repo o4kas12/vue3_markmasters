@@ -40,7 +40,7 @@
             >
           </div>
         </div>
-        <table class="table" v-if="count != 0">
+        <table class="table" style="table-layout: auto" v-if="count != 0">
           <thead>
             <tr>
               <th v-if="switch1 == 0" scope="row">Станция</th>
@@ -104,14 +104,22 @@ export default {
       newValue.setHours(newValue.getHours() + 10);
       let pickedISO = newValue.toISOString().slice(0, 10);
       this.dateISO = pickedISO;
-      this.getJson(byLine, 0);
+      this.getJson(byLine, this.switch1);
     },
   },
   methods: {
     async getJson(url, switcher) {
       this.mainList = [];
       this.switch1 = switcher;
-      const f = await fetch(url + this.addDate(this.dateISO));
+      let urlNew = byLine;
+      if (this.switch1 == 1) {
+        urlNew = byProduct;
+      } else {
+        urlNew = byLine;
+      }
+      //console.log(urlNew + this.addDate(this.dateISO));
+      //console.log(this.switch1);
+      const f = await fetch(urlNew + this.addDate(this.dateISO));
       const data = await f.json();
       this.mainList = data;
       this.count = 0;
@@ -134,6 +142,7 @@ export default {
   },
   created() {
     this.getJson(byLine, 0);
+    console.log("created");
   },
 };
 </script>
