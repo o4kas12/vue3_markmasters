@@ -40,7 +40,7 @@
             >
           </div>
         </div>
-        <table class="table">
+        <table class="table" v-if="count != 0">
           <thead>
             <tr>
               <th v-if="switch1 == 0" scope="row">Станция</th>
@@ -67,6 +67,8 @@
             </tr>
           </tbody>
         </table>
+        <br />
+        <h2 v-if="count == 0">Пусто, выберите другую дату</h2>
       </div>
     </div>
   </div>
@@ -76,6 +78,10 @@
 import Datepicker from "vue3-datepicker";
 //import { ref } from "vue";
 
+const byLine = "http://10.10.3.18:8021/by_line";
+// eslint-disable-next-line no-unused-vars
+const byProduct = "http://10.10.3.18:8021/by_product";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "statistics.vue",
@@ -84,8 +90,11 @@ export default {
   },
   data() {
     const picked = new Date();
+    const dateISO = "";
     return {
       picked,
+      dateISO,
+      count: 0,
       switch1: 0, // 0 - по станциям, 1 - по продукту
       mainList: {},
     };
@@ -94,24 +103,36 @@ export default {
     picked(newValue) {
       newValue.setHours(newValue.getHours() + 10);
       let pickedISO = newValue.toISOString().slice(0, 10);
-      console.log(pickedISO);
-      console.log(this.picked);
+      this.dateISO = pickedISO;
+      this.getJson(byLine, 0);
     },
   },
   methods: {
     async getJson(url, switcher) {
       this.mainList = [];
       this.switch1 = switcher;
-      const f = await fetch(url);
+      const f = await fetch(url + this.addDate(this.dateISO));
       const data = await f.json();
       this.mainList = data;
-      console.log(this.mainList);
+      this.count = 0;
+      // eslint-disable-next-line no-unused-vars
+      for (let key in data) {
+        this.count++;
+      }
+      //console.log(this.count);
+      //console.log(this.mainList);
+      //console.log(this.addDate(this.dateISO));
+    },
+    addDate(date) {
+      if (date === "") {
+        return date;
+      } else {
+        date = "?date=" + date;
+        return date;
+      }
     },
   },
   created() {
-    const byLine = "http://10.10.3.18:8021/by_line";
-    // eslint-disable-next-line no-unused-vars
-    const byProduct = "http://10.10.3.18:8021/by_product";
     this.getJson(byLine, 0);
   },
 };
