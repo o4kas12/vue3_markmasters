@@ -1,38 +1,44 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-12" style="margin-top: -75px">
-        <h1>Статистика</h1>
+      <div class="col-sm-12 innerContent" style="margin-top: -75px">
+        <div class="row">
+          <h1 id="titleWithDate">Статистика</h1>
+        </div>
         <br />
-        <div
-          class="btn-group"
-          role="group"
-          aria-label="Basic radio toggle button group"
-        >
-          <input
-            type="radio"
-            class="btn-check"
-            name="btnradio"
-            id="byLine"
-            autocomplete="off"
-            @click="getJson('http://10.10.3.18:8021/by_line', 0)"
-            checked
-          />
-          <label class="btn btn-outline-primary" for="byLine"
-            >По станциям</label
+        <div class="row">
+          <Datepicker class="datepicker" v-model="picked"></Datepicker>
+          <div
+            class="btn-group"
+            role="group"
+            aria-label="Basic radio toggle button group"
+            id="buttonSwitch"
           >
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="byLine"
+              autocomplete="off"
+              @click="getJson('http://10.10.3.18:8021/by_line', 0)"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="byLine"
+              >По станциям</label
+            >
 
-          <input
-            type="radio"
-            class="btn-check"
-            name="btnradio"
-            id="byProduct"
-            autocomplete="off"
-            @click="getJson('http://10.10.3.18:8021/by_product', 1)"
-          />
-          <label class="btn btn-outline-primary" for="byProduct"
-            >По коду продукта</label
-          >
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="byProduct"
+              autocomplete="off"
+              @click="getJson('http://10.10.3.18:8021/by_product', 1)"
+            />
+            <label class="btn btn-outline-primary" for="byProduct"
+              >По коду продукта</label
+            >
+          </div>
         </div>
         <table class="table">
           <thead>
@@ -67,26 +73,36 @@
 </template>
 
 <script>
-import { ref } from "vue";
-
-// eslint-disable-next-line no-unused-vars
-const today = ref();
-console.log(today);
+import Datepicker from "vue3-datepicker";
+//import { ref } from "vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "history.vue",
+  name: "statistics.vue",
+  components: {
+    Datepicker,
+  },
   data() {
+    const picked = new Date();
     return {
-      switch1: 0,
+      picked,
+      switch1: 0, // 0 - по станциям, 1 - по продукту
       mainList: {},
     };
   },
+  watch: {
+    picked(newValue) {
+      newValue.setHours(newValue.getHours() + 10);
+      let pickedISO = newValue.toISOString().slice(0, 10);
+      console.log(pickedISO);
+      console.log(this.picked);
+    },
+  },
   methods: {
-    async getJson(JSON, switcher) {
+    async getJson(url, switcher) {
       this.mainList = [];
       this.switch1 = switcher;
-      const f = await fetch(JSON);
+      const f = await fetch(url);
       const data = await f.json();
       this.mainList = data;
       console.log(this.mainList);

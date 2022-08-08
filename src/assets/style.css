@@ -91,6 +91,9 @@ strong.AccordionHeaderState {
         padding-left: 0.1rem !important;
         padding-right: 0.1rem !important;
     }
+    .innerContent {
+        margin-left: -22px;
+    }
 }
 
 .align-items-start {
@@ -231,5 +234,34 @@ ul li.checkboxesManage {
 @media (max-width: 1343px) {
     #customCardDashboard {
         min-width: 9rem!important;
+    }
+}
+
+/* statistics */
+
+.v3dp__datepicker {
+    width: auto!important;
+}
+
+.datepicker {
+    width: 280px;
+    text-align: center;
+    height: 38px;
+    font-size: 25px;
+}
+
+#titleWithDate {
+    width: auto;
+    margin: auto;
+    text-align: center;
+}
+
+#buttonSwitch {
+    max-width: 50%;
+}
+
+@media (max-width: 892px) {
+    #buttonSwitch {
+        min-width: 304px;
     }
 }
