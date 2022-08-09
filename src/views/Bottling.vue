@@ -198,7 +198,7 @@ export default {
   props: ["intervalGetId"],
   data() {
     onUnmounted(() => {
-      console.log("unmounted");
+      console.log("bottling unmounted");
       clearInterval(this.interValue);
     });
     return {
@@ -283,7 +283,7 @@ export default {
     },
   },
   created() {
-    console.log("created");
+    console.log("bottling created");
     this.getProduct();
     this.checkedIds();
     this.interVal();

@@ -45,10 +45,12 @@
             <tr>
               <th v-if="switch1 == 0" scope="row">Станция</th>
               <th scope="col">Продукт</th>
-              <th scope="col">Всего</th>
-              <th scope="col">Хорошо</th>
-              <th scope="col">Плохо</th>
-              <th scope="col">Вывод</th>
+              <th v-if="switch1 == 1" scope="col">Готовая</th>
+              <th scope="col">Промаркировано</th>
+              <th v-if="switch1 == 1" scope="col">Разница</th>
+              <th scope="col">Отбраковано</th>
+              <th scope="col">Дубли</th>
+              <th scope="col">Сканер</th>
             </tr>
           </thead>
           <tbody>
@@ -60,15 +62,25 @@
               <td v-else-if="switch1 == 1">
                 {{ index + " " + mainList[index]["name"] }}
               </td>
-              <td>{{ mainList[index]["total"] }}</td>
-              <td>{{ mainList[index]["good"] }}</td>
+              <td v-if="switch1 == 1" :id="'inputField' + index">
+                <input
+                  v-model="listOfReady[index]"
+                  @input="inputListOfReady(index)"
+                  type="number"
+                />
+              </td>
+              <td :id="'goodMark' + index">{{ mainList[index]["good"] }}</td>
+              <td v-if="switch1 == 1" :id="'differ' + index">
+                {{ listOfDiff[index] }}
+              </td>
               <td>{{ mainList[index]["bad"] }}</td>
+              <td>{{ mainList[index]["duplicate"] }}</td>
               <td>{{ mainList[index]["remove"] }}</td>
             </tr>
           </tbody>
         </table>
         <br />
-        <h2 v-if="count == 0">Пусто, выберите другую дату</h2>
+        <h1 v-if="count == 0">Пусто, выберите другую дату</h1>
       </div>
     </div>
   </div>
@@ -94,6 +106,9 @@ export default {
     return {
       picked,
       dateISO,
+      listOfReady: {},
+      listOfGood: {},
+      listOfDiff: {},
       count: 0,
       switch1: 0, // 0 - по станциям, 1 - по продукту
       mainList: {},
@@ -105,6 +120,8 @@ export default {
       let pickedISO = newValue.toISOString().slice(0, 10);
       this.dateISO = pickedISO;
       this.getJson(byLine, this.switch1);
+      this.listOfReady = {};
+      this.listOfDiff = {};
     },
   },
   methods: {
@@ -120,14 +137,16 @@ export default {
       //console.log(urlNew + this.addDate(this.dateISO));
       //console.log(this.switch1);
       const f = await fetch(urlNew + this.addDate(this.dateISO));
-      const data = await f.json();
-      this.mainList = data;
+      this.mainList = await f.json();
       this.count = 0;
       // eslint-disable-next-line no-unused-vars
-      for (let key in data) {
+      for (let key in this.mainList) {
         this.count++;
+        if (this.switch1 == 1) {
+          console.log(key);
+          this.listOfGood[key] = this.mainList[key]["good"];
+        }
       }
-      //console.log(this.count);
       //console.log(this.mainList);
       //console.log(this.addDate(this.dateISO));
     },
@@ -139,10 +158,14 @@ export default {
         return date;
       }
     },
+    inputListOfReady(index) {
+      console.log("inputListOfReady = " + this.listOfReady[index]);
+      this.listOfDiff[index] = this.listOfReady[index] - this.listOfGood[index];
+    },
   },
   created() {
     this.getJson(byLine, 0);
-    console.log("created");
+    console.log("statistics created");
   },
 };
 </script>

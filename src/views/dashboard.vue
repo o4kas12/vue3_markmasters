@@ -79,7 +79,7 @@ export default {
   name: "dashboard",
   data() {
     onUnmounted(() => {
-      console.log("unmounted");
+      console.log("dashboard unmounted");
       clearInterval(this.interValue);
     });
     return {
@@ -161,7 +161,7 @@ export default {
     },
   },
   created() {
-    console.log("created");
+    console.log("dashboard created");
     this.getProduct();
     this.checkedIds();
     this.interVal();
