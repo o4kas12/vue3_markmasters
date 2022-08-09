@@ -11,6 +11,11 @@ export default {
   props: {
     fullscreen: Boolean,
   },
+  data() {
+    return {
+      size: this.fullscreen,
+    };
+  },
 };
 </script>
 

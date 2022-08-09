@@ -8,7 +8,7 @@
         <a href="/" class="logoCard">
           <img
             alt="Vue logo"
-            class="logoPMZ w-75"
+            class="logoPMZ w-65"
             src="./assets/logo_pmz.png"
           />
         </a>

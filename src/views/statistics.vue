@@ -5,6 +5,7 @@
         <div class="row">
           <h1 id="titleWithDate">Статистика</h1>
         </div>
+        <app-spinner v-if="loadStat" />
         <br />
         <div class="row">
           <Datepicker class="datepicker" v-model="picked"></Datepicker>
@@ -88,8 +89,10 @@
 
 <script>
 import Datepicker from "vue3-datepicker";
-//import { ref } from "vue";
+import { ref } from "vue";
+import AppSpinner from "@/components/AppSpinner";
 
+const loadStat = ref(false);
 const byLine = "http://10.10.3.18:8021/by_line";
 // eslint-disable-next-line no-unused-vars
 const byProduct = "http://10.10.3.18:8021/by_product";
@@ -98,6 +101,7 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "statistics.vue",
   components: {
+    AppSpinner,
     Datepicker,
   },
   data() {
@@ -106,6 +110,7 @@ export default {
     return {
       picked,
       dateISO,
+      loadStat,
       listOfReady: {},
       listOfGood: {},
       listOfDiff: {},
@@ -126,6 +131,7 @@ export default {
   },
   methods: {
     async getJson(url, switcher) {
+      loadStat.value = true;
       this.mainList = [];
       this.switch1 = switcher;
       let urlNew = byLine;
@@ -147,6 +153,7 @@ export default {
           this.listOfGood[key] = this.mainList[key]["good"];
         }
       }
+      loadStat.value = false;
       //console.log(this.mainList);
       //console.log(this.addDate(this.dateISO));
     },
