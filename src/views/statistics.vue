@@ -1,11 +1,11 @@
 <template>
+  <app-spinner v-if="loadStat" />
   <div class="container">
     <div class="row">
       <div class="col-sm-12 innerContent" style="margin-top: -75px">
         <div class="row">
           <h1 id="titleWithDate">Статистика</h1>
         </div>
-        <app-spinner v-if="loadStat" />
         <br />
         <div class="row">
           <Datepicker class="datepicker" v-model="picked"></Datepicker>
@@ -114,7 +114,7 @@ export default {
       listOfReady: {},
       listOfGood: {},
       listOfDiff: {},
-      count: 0,
+      count: 1,
       switch1: 0, // 0 - по станциям, 1 - по продукту
       mainList: {},
     };

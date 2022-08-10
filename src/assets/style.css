@@ -238,6 +238,9 @@ ul li.checkboxesManage {
 }
 
 /* statistics */
+.btn:focus {
+    outline: none;
+}
 
 .v3dp__datepicker {
     width: auto!important;
@@ -267,8 +270,8 @@ ul li.checkboxesManage {
 }
 
 .app-spinner {
-    position: absolute;
-    top: 0;
+    position: relative;
+    top: 100px;
     left: 0;
     z-index: 3;
     width: 100%;

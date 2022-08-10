@@ -71,6 +71,7 @@
             </ul>
           </div>
         </div>
+        <app-spinner v-if="loadAccordion" />
         <div class="accordion" id="accordionPanelsStayOpen">
           <div
             class="accordion-item"
@@ -189,8 +190,11 @@
 import AccordionStations from "@/components/AccordionStations.vue";
 import VueSpeedometer from "vue-speedometer";
 // import Alert from "../components/Alert.vue";
+import AppSpinner from "@/components/AppSpinner";
 import axios from "axios";
-import { onUnmounted } from "vue";
+import { onUnmounted, ref } from "vue";
+
+const loadAccordion = ref(false);
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -213,14 +217,19 @@ export default {
       interValue: null,
       machinesMaxProdValue: [],
       machinesProdValue: [],
+      loadAccordion,
     };
   },
   components: {
     AccordionStations,
     VueSpeedometer,
+    AppSpinner,
   },
   methods: {
     async getIds() {
+      if (this.machines.length < 1) {
+        loadAccordion.value = true;
+      }
       const f = await fetch(
         "http://192.168.100.100/terminal/markstation/get_all_stat"
       );
@@ -230,25 +239,32 @@ export default {
       let machineState = [];
       let machinesMaxProdValue = [];
       let machinesProdValue = [];
-      for (let i = 0; i < this.machines.length; i++) {
-        let y = null;
-        if (data[i]["options"]["last_seen_timeout"] > 90) {
-          y = "greyClass";
-        } else if (data[i]["plc_state"]["machine_status"] === "1") {
-          y = "greenClass";
-        } else {
-          y = "redClass";
-          this.showMessage = true;
-          this.message =
-            data[i]["main"]["id"] +
-            " " +
-            String(data[i]["plc_state"]["message_from_plc"]).split(";")[1];
+      try {
+        for (let i = 0; i < this.machines.length; i++) {
+          let y = null;
+          if (data[i]["options"]["last_seen_timeout"] > 90) {
+            y = "greyClass";
+          } else if (data[i]["plc_state"]["machine_status"] === "1") {
+            y = "greenClass";
+          } else {
+            y = "redClass";
+            this.showMessage = true;
+            this.message =
+              data[i]["main"]["id"] +
+              " " +
+              String(data[i]["plc_state"]["message_from_plc"]).split(";")[1];
+          }
+          machineState.push(String(y));
+          machinesMaxProdValue.push(
+            this.machines[i]["options"]["max_items_per_minute"]
+          );
+          machinesProdValue.push(
+            this.machines[i]["options"]["items_per_minute"]
+          );
         }
-        machineState.push(String(y));
-        machinesMaxProdValue.push(
-          this.machines[i]["options"]["max_items_per_minute"]
-        );
-        machinesProdValue.push(this.machines[i]["options"]["items_per_minute"]);
+      } catch (error) {
+        console.log("Ошибка Bottling.vue 243 строка");
+        console.log(error);
       }
       //console.log("machineState = " + machineState);
       console.log("machineState");
@@ -256,6 +272,7 @@ export default {
       this.machinesMaxProdValue = machinesMaxProdValue;
       this.machinesProdValue = machinesProdValue;
       //console.log(this.machinesProdValue);
+      loadAccordion.value = false;
     },
 
     checkedIds() {
