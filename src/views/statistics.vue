@@ -110,7 +110,7 @@ export default {
     return {
       picked,
       dateISO,
-      loadStat,
+      loadStat, // спинер при загрузке данных
       listOfReady: {},
       listOfGood: {},
       listOfDiff: {},
@@ -127,6 +127,7 @@ export default {
       this.getJson(byLine, this.switch1);
       this.listOfReady = {};
       this.listOfDiff = {};
+      this.$router.push({ query: { date: this.dateISO } });
     },
   },
   methods: {
@@ -149,7 +150,7 @@ export default {
       for (let key in this.mainList) {
         this.count++;
         if (this.switch1 == 1) {
-          console.log(key);
+          //console.log(key);
           this.listOfGood[key] = this.mainList[key]["good"];
         }
       }
@@ -160,6 +161,8 @@ export default {
     addDate(date) {
       if (date === "") {
         return date;
+      } else if (date === null) {
+        return (date = "");
       } else {
         date = "?date=" + date;
         return date;
@@ -169,8 +172,23 @@ export default {
       console.log("inputListOfReady = " + this.listOfReady[index]);
       this.listOfDiff[index] = this.listOfReady[index] - this.listOfGood[index];
     },
+    getParamFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const date = urlParams.get("date");
+      try {
+        if (date === null) {
+          console.log("date type = " + typeof date);
+        } else {
+          this.dateISO = date;
+          this.picked = new Date(date);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   created() {
+    this.getParamFromUrl();
     this.getJson(byLine, 0);
     console.log("statistics created");
   },
