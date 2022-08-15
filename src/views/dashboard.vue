@@ -53,7 +53,8 @@
             ].name_gp
           }}
         </p>
-        <a
+        <router-link
+          :to="'/?station=' + index"
           class="btn btn-primary"
           :class="{
             greenClass: machineState[index] === 'greenClass',
@@ -61,7 +62,7 @@
             greyClass: machineState[index] === 'greyClass',
           }"
           @click="toastMethod"
-          >Go somewhere</a
+          >Открыть</router-link
         >
       </div>
     </div>

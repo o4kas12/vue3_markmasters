@@ -218,12 +218,24 @@ export default {
       machinesMaxProdValue: [],
       machinesProdValue: [],
       loadAccordion,
+      openedStation: "",
+      scrollToStation: "",
     };
   },
   components: {
     AccordionStations,
     VueSpeedometer,
     AppSpinner,
+  },
+  watch: {
+    loadAccordion(newValue) {
+      if (newValue === false) {
+        console.log("loadAccordion ready");
+        setTimeout(() => this.getParamFromUrl(), 500);
+      } else {
+        console.log("not ready");
+      }
+    },
   },
   methods: {
     async getIds() {
@@ -272,7 +284,9 @@ export default {
       this.machinesMaxProdValue = machinesMaxProdValue;
       this.machinesProdValue = machinesProdValue;
       //console.log(this.machinesProdValue);
-      loadAccordion.value = false;
+      if (loadAccordion.value === true) {
+        loadAccordion.value = false;
+      }
     },
 
     checkedIds() {
@@ -297,6 +311,23 @@ export default {
         this.getIds();
       }, 10000);
       this.interValue = interValue;
+    },
+    getParamFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const station = urlParams.get("station");
+      this.openedStation = "panelsStayOpen-collapse" + station;
+      this.scrollToStation =
+        "panelsStayOpen-collapse" + String(Number(station) - 1);
+      try {
+        if (station === null) {
+          console.log("station = " + typeof station);
+        } else {
+          document.getElementById(this.openedStation).classList.add("show");
+          document.getElementById(this.openedStation).scrollIntoView();
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   created() {
