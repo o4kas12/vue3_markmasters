@@ -44,7 +44,10 @@
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
       <!-- Top navigation-->
-      <div class="navbar navbar-expand-lg navbar-light border-bottom">
+      <div
+        class="navbar navbar-expand-lg navbar-light border-bottom"
+        id="header-menu"
+      >
         <div class="container-fluid" style="position: relative; height: 40px">
           <button class="btn btn-primary" id="sidebarToggle">МЕНЮ</button>
           <div

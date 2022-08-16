@@ -30,11 +30,10 @@
       class="card"
       v-for="(item, index) in machines"
       :key="index"
-      style="min-width: 14rem; margin: auto; border-radius: 10px"
     >
       <div
         class="card-body"
-        style="border-radius: 10px"
+        style="border-radius: 5px"
         :class="{
           greenClass: machineState[index] === 'greenClass',
           redClass: machineState[index] === 'redClass',
