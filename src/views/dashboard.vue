@@ -30,9 +30,17 @@
       class="card"
       v-for="(item, index) in machines"
       :key="index"
-      style="min-width: 14rem; margin: auto"
+      style="min-width: 14rem; margin: auto; border-radius: 10px"
     >
-      <div class="card-body">
+      <div
+        class="card-body"
+        style="border-radius: 10px"
+        :class="{
+          greenClass: machineState[index] === 'greenClass',
+          redClass: machineState[index] === 'redClass',
+          greyClass: machineState[index] === 'greyClass',
+        }"
+      >
         <vue-speedometer
           :maxSegmentLabels="0"
           :segments="5"
@@ -56,11 +64,6 @@
         <router-link
           :to="'/?station=' + index"
           class="btn btn-primary"
-          :class="{
-            greenClass: machineState[index] === 'greenClass',
-            redClass: machineState[index] === 'redClass',
-            greyClass: machineState[index] === 'greyClass',
-          }"
           @click="toastMethod"
           >Открыть</router-link
         >

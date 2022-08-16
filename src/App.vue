@@ -16,21 +16,25 @@
           <br />
           <router-link
             to="/"
+            active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
             >Розлив</router-link
           >
           <router-link
             to="/statistics"
+            active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
             >Статистика</router-link
           >
           <router-link
             to="/dashboard"
+            active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
             >Dashboard</router-link
           >
           <router-link
             to="/manage"
+            active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
             >Settings</router-link
           >

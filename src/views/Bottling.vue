@@ -231,7 +231,7 @@ export default {
     loadAccordion(newValue) {
       if (newValue === false) {
         console.log("loadAccordion ready");
-        setTimeout(() => this.getParamFromUrl(), 500);
+        setTimeout(() => this.getParamFromUrl(), 10);
       } else {
         console.log("not ready");
       }
@@ -319,11 +319,14 @@ export default {
       this.scrollToStation =
         "panelsStayOpen-collapse" + String(Number(station) - 1);
       try {
-        if (station === null) {
+        if (station < 1) {
           console.log("station = " + typeof station);
         } else {
           document.getElementById(this.openedStation).classList.add("show");
-          document.getElementById(this.openedStation).scrollIntoView();
+          let someElem = document.getElementById(this.openedStation);
+          let elementPosition = someElem.getBoundingClientRect().top;
+          let element = elementPosition + window.pageYOffset - 45;
+          window.scrollTo({ top: element, behavior: "smooth" });
         }
       } catch (error) {
         console.log(error);
