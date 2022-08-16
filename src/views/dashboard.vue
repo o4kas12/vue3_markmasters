@@ -1,4 +1,4 @@
-<template>
+<template style="margin-top: 50px">
   <div aria-live="polite" aria-atomic="true" class="toast-alerts">
     <div class="toast-container">
       <div
@@ -24,49 +24,51 @@
       </div>
     </div>
   </div>
-  <div class="card-group">
+  <div class="card-group" id="dashboard-cards">
     <div
       id="customCardDashboard"
       class="card"
       v-for="(item, index) in machines"
       :key="index"
     >
-      <div
-        class="card-body"
-        style="border-radius: 5px"
-        :class="{
-          greenClass: machineState[index] === 'greenClass',
-          redClass: machineState[index] === 'redClass',
-          greyClass: machineState[index] === 'greyClass',
-        }"
+      <router-link
+        style="text-decoration: none; color: inherit"
+        :to="'/?station=' + index"
       >
-        <vue-speedometer
-          :maxSegmentLabels="0"
-          :segments="5"
-          :needleHeightRatio="0.6"
-          :value="machinesProdValue[index]"
-          :maxValue="machinesMaxProdValue[index]"
-          :width="100"
-          :height="60"
-          :ringWidth="30"
-        />
-        <h5 class="card-title">{{ machines[index]["main"]["id"] }}</h5>
-        <p class="card-text">
-          {{
-            productList[
-              productList
-                .map((x) => x.cod_gp)
-                .indexOf(String(machines[index]["main"]["current_cod_gp"]), 0)
-            ].name_gp
-          }}
-        </p>
-        <router-link
-          :to="'/?station=' + index"
-          class="btn btn-primary"
-          @click="toastMethod"
-          >Открыть</router-link
+        <div
+          class="card-body dashboardCard-body"
+          :class="{
+            greenClass: machineState[index] === 'greenClass',
+            redClass: machineState[index] === 'redClass',
+            greyClass: machineState[index] === 'greyClass',
+          }"
         >
-      </div>
+          <vue-speedometer
+            class="inner-card"
+            :maxSegmentLabels="0"
+            :segments="5"
+            :needleHeightRatio="0.6"
+            :value="machinesProdValue[index]"
+            :maxValue="machinesMaxProdValue[index]"
+            :width="100"
+            :height="60"
+            :ringWidth="30"
+          />
+          <h5 class="card-title">{{ machines[index]["main"]["id"] }}</h5>
+          <p class="card-text dashboard-card-text">
+            {{
+              productList[
+                productList
+                  .map((x) => x.cod_gp)
+                  .indexOf(String(machines[index]["main"]["current_cod_gp"]), 0)
+              ].name_gp
+            }}
+          </p>
+          <strong class="AccordionHeaderState">{{
+            String(machines[index]["plc_state"]["message_from_plc"])
+          }}</strong>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -107,6 +109,12 @@ export default {
       );
       const data = await f.json();
       //console.log(data);
+      for (let i in data) {
+        if (data[i]["main"]["id"] === "A9-99") {
+          data.splice(i);
+          console.log("A9-99 Removed");
+        }
+      }
       this.machines = data;
       let machineState = [];
       let machinesMaxProdValue = [];

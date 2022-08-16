@@ -46,6 +46,10 @@
     background-color: #545b62;
 }
 
+.list-group-item-light.list-group-item-action.active {
+    background-color: #0d6efd!important;
+}
+
 .speedometerDiv {
     margin-top: -30px;
     margin-bottom: -10px;
@@ -170,12 +174,12 @@ body.sb-sidenav-toggled #wrapper #page-content-wrapper {
 
     body.sb-sidenav-toggled #wrapper #page-content-wrapper {
         width: 100%;
-        transition: width 0.25s ease-out;
+        transition: width 0.2s ease-out;
     }
 
     body.sb-sidenav-toggled #wrapper #header-menu {
         width: 100%;
-        transition: width 0.25s ease-out;
+        transition: width 0.2s ease-out;
     }
 }
 
@@ -248,9 +252,22 @@ ul li.checkboxesManage {
 #customCardDashboard {
     margin: 5px;
     border-radius: 5px;
-    min-width: 14rem;
-    height: 14rem;
+    min-width: 13rem;
+    max-height: 13rem;
     transition: all 0.15s ease-in-out;
+}
+
+#dashboard-cards {
+    margin-top: -30px;
+}
+
+.dashboardCard-body {
+    height: 13rem;
+    border-radius: 5px;
+}
+
+.inner-card {
+    margin-top: -20px;
 }
 
 #customCardDashboard:hover {
@@ -270,7 +287,20 @@ ul li.checkboxesManage {
 
 @media (max-width: 1343px) {
     #customCardDashboard {
-        min-width: 9rem!important;
+        min-width: 9.5rem!important;
+
+    }
+    .inner-card {
+        margin-top: -27px;
+    }
+    #dashboard-cards {
+        margin-top: -35px;
+    }
+    .dashboard-card-text {
+        font-size: 12px;
+    }
+    .dashboardCard-body {
+        height: 12rem;
     }
 }
 

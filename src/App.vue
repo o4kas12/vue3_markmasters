@@ -1,8 +1,7 @@
 <template>
   <div class="d-flex" id="wrapper">
-    <div class="border-end bg-white" id="fakeSidebar"></div>
     <!-- Sidebar-->
-    <div class="border-end bg-white" id="sidebar-wrapper">
+    <div class="border-end bg-white" id="sidebar-wrapper" style="z-index: 99">
       <br />
       <div id="sidebarContent">
         <a href="/" class="logoCard">
@@ -12,8 +11,15 @@
             src="./assets/logo_pmz.png"
           />
         </a>
+        <br />
         <div class="list-group list-group-flush">
           <br />
+          <router-link
+            to="/dashboard"
+            active-class="active"
+            class="list-group-item list-group-item-action list-group-item-light p-3"
+            >Dashboard</router-link
+          >
           <router-link
             to="/"
             active-class="active"
@@ -27,12 +33,6 @@
             >Статистика</router-link
           >
           <router-link
-            to="/dashboard"
-            active-class="active"
-            class="list-group-item list-group-item-action list-group-item-light p-3"
-            >Dashboard</router-link
-          >
-          <router-link
             to="/manage"
             active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
@@ -44,12 +44,15 @@
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
       <!-- Top navigation-->
-      <div
-        class="navbar navbar-expand-lg navbar-light border-bottom"
-        id="header-menu"
-      >
+      <div class="navbar navbar-expand-lg navbar-light" id="header-menu">
         <div class="container-fluid" style="position: relative; height: 40px">
-          <button class="btn btn-primary" id="sidebarToggle">МЕНЮ</button>
+          <button
+            class="btn btn-outline-primary"
+            id="sidebarToggle"
+            style="margin-left: -20px"
+          >
+            МЕНЮ
+          </button>
           <div
             class="collapse navbar-collapse"
             id="navbarSupportedContent"
