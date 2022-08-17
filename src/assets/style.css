@@ -287,6 +287,10 @@ ul li.checkboxesManage {
     margin-top: -30px;
 }
 
+.dashboard-card-text {
+    margin-bottom: 0.1rem!important;
+}
+
 .dashboardCard-body {
     height: 13rem;
     border-radius: 5px;
@@ -298,15 +302,16 @@ ul li.checkboxesManage {
 
 #customCardDashboard:hover {
     z-index: 999;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 15px 20px rgba(0,0,0,0.5);
     transition: all 0.15s ease-in-out;
+    transform: scale(1.05);
 }
 
 .toast-alerts {
     position: fixed;
     display: block;
     z-index: 9999;
-    right: 22px;
+    left: 22px;
     bottom: 22px;
 }
 

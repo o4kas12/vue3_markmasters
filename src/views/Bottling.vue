@@ -319,14 +319,14 @@ export default {
       this.scrollToStation =
         "panelsStayOpen-collapse" + String(Number(station) - 1);
       try {
-        document.getElementById(this.openedStation).classList.add("show");
-        if (station < 1) {
-          console.log("station = " + typeof station);
-        } else {
+        if (station > 0) {
+          document.getElementById(this.openedStation).classList.add("show");
           let someElem = document.getElementById(this.openedStation);
           let elementPosition = someElem.getBoundingClientRect().top;
           let element = elementPosition + window.pageYOffset - 45;
           window.scrollTo({ top: element, behavior: "smooth" });
+        } else if (station == 0) {
+          document.getElementById(this.openedStation).classList.add("show");
         }
       } catch (error) {
         console.log(error);

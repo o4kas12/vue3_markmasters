@@ -9,7 +9,7 @@
         aria-atomic="true"
       >
         <div class="toast-header">
-          <strong class="me-auto">Bootstrap2</strong>
+          <strong class="me-auto">Alert</strong>
           <small>just now</small>
           <button
             type="button"
@@ -53,6 +53,13 @@
             :width="100"
             :height="60"
             :ringWidth="30"
+            data-html="true"
+            :title="
+              'Скорость ' +
+              machinesProdValue[index] +
+              ' из ' +
+              machinesMaxProdValue[index]
+            "
           />
           <h5 class="card-title">{{ machines[index]["main"]["id"] }}</h5>
           <p class="card-text dashboard-card-text">
@@ -65,7 +72,15 @@
             }}
           </p>
           <strong class="AccordionHeaderState">{{
-            String(machines[index]["plc_state"]["message_from_plc"])
+            String(machines[index]["plc_state"]["message_from_plc"]).split(
+              ";"
+            )[0]
+          }}</strong
+          ><br />
+          <strong class="AccordionHeaderState">{{
+            String(machines[index]["plc_state"]["message_from_plc"]).split(
+              ";"
+            )[1]
           }}</strong>
         </div>
       </router-link>
