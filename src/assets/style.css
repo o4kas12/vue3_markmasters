@@ -98,6 +98,11 @@ strong.AccordionHeaderState {
     .innerContent {
         margin-left: -22px;
     }
+    #sidebarToggle {
+        left: 15rem!important;
+        border-radius: 0 10px 10px 0!important;
+        transition: all 0.3s ease-in-out;
+    }
 }
 
 .align-items-start {
@@ -124,6 +129,10 @@ strong.AccordionHeaderState {
     width: 15rem;
 }
 
+#sidebarContent {
+    margin-top: 50px;
+}
+
 #page-content-wrapper {
     min-width: 100vw;
     transition: margin-left 0.2s ease-in-out;
@@ -135,7 +144,20 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
 body.sb-sidenav-toggled #wrapper #page-content-wrapper {
     margin-left: 15rem;
-    transition: margin-left 0.2s ease-in-out;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+#sidebarToggle {
+    position: absolute;
+    left: 10.2rem;
+    top: 10px;
+    border-radius: 10px 0 0 10px;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper #sidebarToggle {
+    left: 15rem!important;
+    border-radius: 0 10px 10px 0!important;
+    transition: all 0.3s ease-in-out;
 }
 
 .btn:focus,.btn:active {
@@ -180,6 +202,10 @@ body.sb-sidenav-toggled #wrapper #page-content-wrapper {
     body.sb-sidenav-toggled #wrapper #header-menu {
         width: 100%;
         transition: width 0.2s ease-out;
+    }
+
+    body.sb-sidenav-toggled #wrapper #sidebar-wrapper #sidebarToggle {
+        left: 15rem;
     }
 }
 

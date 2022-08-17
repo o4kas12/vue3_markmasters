@@ -3,6 +3,7 @@
     <!-- Sidebar-->
     <div class="border-end bg-white" id="sidebar-wrapper" style="z-index: 99">
       <br />
+      <button class="btn btn-primary" id="sidebarToggle">МЕНЮ</button>
       <div id="sidebarContent">
         <a href="/" class="logoCard">
           <img
@@ -46,13 +47,6 @@
       <!-- Top navigation-->
       <div class="navbar navbar-expand-lg navbar-light" id="header-menu">
         <div class="container-fluid" style="position: relative; height: 40px">
-          <button
-            class="btn btn-outline-primary"
-            id="sidebarToggle"
-            style="margin-left: -20px"
-          >
-            МЕНЮ
-          </button>
           <div
             class="collapse navbar-collapse"
             id="navbarSupportedContent"
