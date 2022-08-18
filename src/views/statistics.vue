@@ -176,9 +176,9 @@ export default {
       const urlParams = new URLSearchParams(window.location.search);
       const date = urlParams.get("date");
       try {
-        if (date === null) {
+        if (date != null && date !== "") {
           console.log("date type = " + typeof date);
-        } else {
+          console.log("date = " + "_" + date + "_");
           this.dateISO = date;
           this.picked = new Date(date);
         }
@@ -190,7 +190,7 @@ export default {
   created() {
     this.getParamFromUrl();
     this.getJson(byLine, 0);
-    console.log("statistics created");
+    //console.log("statistics created");
   },
 };
 </script>

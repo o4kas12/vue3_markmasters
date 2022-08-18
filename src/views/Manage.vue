@@ -91,7 +91,16 @@
       v-for="(item, index) in message"
       :key="index"
       :message="
-        'Ответ от ' + message[index]['ip'] + ' = ' + message[index]['message']
+        'Ответ от ' +
+        machineNames[
+          machineNames
+            .map((x) => x.ip_address)
+            .indexOf(String(message[index]['ip']), 0)
+        ].station_name +
+        ' (' +
+        message[index]['ip'] +
+        ') = ' +
+        message[index]['message']
       "
     ></alert>
   </template>
@@ -134,8 +143,8 @@ export default {
       this.machines = data;
       for (let i = 0; i < this.machines.length; i++) {
         this.machineNames.push({
-          key: this.machines[i]["main"]["ip"],
-          value: this.machines[i]["main"]["id"],
+          ip_address: this.machines[i]["main"]["ip"],
+          station_name: this.machines[i]["main"]["id"],
         });
       }
     },

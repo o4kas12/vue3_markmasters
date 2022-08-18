@@ -71,17 +71,19 @@
               ].name_gp
             }}
           </p>
-          <strong class="AccordionHeaderState">{{
-            String(machines[index]["plc_state"]["message_from_plc"]).split(
-              ";"
-            )[0]
-          }}</strong
-          ><br />
-          <strong class="AccordionHeaderState">{{
-            String(machines[index]["plc_state"]["message_from_plc"]).split(
-              ";"
-            )[1]
-          }}</strong>
+          <strong
+            :title="
+              String(machines[index]['plc_state']['message_from_plc']).split(
+                ';'
+              )[0]
+            "
+            class="AccordionHeaderState"
+            >{{
+              String(machines[index]["plc_state"]["message_from_plc"]).split(
+                ";"
+              )[1]
+            }}</strong
+          >
         </div>
       </router-link>
     </div>
@@ -127,7 +129,6 @@ export default {
       for (let i in data) {
         if (data[i]["main"]["id"] === "A9-99") {
           data.splice(i);
-          console.log("A9-99 Removed");
         }
       }
       this.machines = data;

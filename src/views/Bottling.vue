@@ -230,10 +230,10 @@ export default {
   watch: {
     loadAccordion(newValue) {
       if (newValue === false) {
-        console.log("loadAccordion ready");
+        //console.log("loadAccordion ready");
         setTimeout(() => this.getParamFromUrl(), 10);
       } else {
-        console.log("not ready");
+        //console.log("not ready");
       }
     },
   },
