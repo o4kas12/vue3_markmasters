@@ -21,7 +21,17 @@
         :value="checkedMachines[index]"
         v-model="checkedMachines[index]"
       />
-      {{ machines[index]["main"]["id"] }}
+      &nbsp;
+      <a
+        target="_blank"
+        :href="
+          'http://' +
+          machines[index]['main']['ip'] +
+          ':8090/line/static_files/html/markirovka/index.html'
+        "
+      >
+        {{ machines[index]["main"]["id"] }}
+      </a>
     </li>
   </ul>
   <hr v-if="machines.length > 0" />
