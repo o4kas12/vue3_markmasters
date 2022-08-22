@@ -284,6 +284,7 @@ ul li.checkboxesManage {
     min-width: 13rem;
     max-height: 13rem;
     transition: all 0.15s ease-in-out;
+    max-width: 29rem;
 }
 
 #dashboard-cards {
@@ -322,6 +323,7 @@ ul li.checkboxesManage {
 @media (max-width: 1343px) {
     #customCardDashboard {
         min-width: 9.5rem!important;
+        max-width: 20rem!important;
 
     }
     .inner-card {
