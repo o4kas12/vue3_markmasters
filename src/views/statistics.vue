@@ -21,7 +21,7 @@
               name="btnradio"
               id="byLine"
               autocomplete="off"
-              @click="getJson('http://10.10.3.18:8021/by_line', 0)"
+              @click="getJson('http://192.168.100.100:8021/by_line', 0)"
               checked
             />
             <label class="btn btn-outline-primary" for="byLine"
@@ -34,7 +34,7 @@
               name="btnradio"
               id="byProduct"
               autocomplete="off"
-              @click="getJson('http://10.10.3.18:8021/by_product', 1)"
+              @click="getJson('http://192.168.100.100:8021/by_product', 1)"
             />
             <label class="btn btn-outline-primary" for="byProduct"
               >По коду продукта</label
@@ -93,9 +93,9 @@ import { ref } from "vue";
 import AppSpinner from "@/components/AppSpinner";
 
 const loadStat = ref(false);
-const byLine = "http://10.10.3.18:8021/by_line";
+const byLine = "http://192.168.100.100:8021/by_line";
 // eslint-disable-next-line no-unused-vars
-const byProduct = "http://10.10.3.18:8021/by_product";
+const byProduct = "http://192.168.100.100:8021/by_product";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names

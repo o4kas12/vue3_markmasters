@@ -127,7 +127,10 @@ export default {
       const data = await f.json();
       //console.log(data);
       for (let i in data) {
-        if (data[i]["main"]["id"] === "A9-99") {
+        if (
+          data[i]["main"]["id"] === "A9-99" ||
+          data[i]["main"]["id"] === "A9-98"
+        ) {
           data.splice(i);
         }
       }
@@ -151,7 +154,7 @@ export default {
         machinesProdValue.push(this.machines[i]["options"]["items_per_minute"]);
       }
       //console.log("machineState = " + machineState);
-      console.log("machineState");
+      //console.log("machineState");
       this.machineState = machineState;
       this.machinesMaxProdValue = machinesMaxProdValue;
       this.machinesProdValue = machinesProdValue;

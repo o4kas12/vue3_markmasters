@@ -19,7 +19,6 @@
           <h1 style="margin: 0 21px 0">
             <AccordionStations />
           </h1>
-          <!-- <alert :message="message" v-if="showMessage"></alert> /-->
         </div>
         <div class="collapse" id="collapseID">
           <div class="card card-body">
@@ -279,7 +278,7 @@ export default {
         console.log(error);
       }
       //console.log("machineState = " + machineState);
-      console.log("machineState");
+      //console.log("machineState");
       this.machineState = machineState;
       this.machinesMaxProdValue = machinesMaxProdValue;
       this.machinesProdValue = machinesProdValue;
