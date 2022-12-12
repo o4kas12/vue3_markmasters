@@ -34,6 +34,12 @@
             >Статистика</router-link
           >
           <router-link
+            to="/logs"
+            active-class="active"
+            class="list-group-item list-group-item-action list-group-item-light p-3"
+            >Логи</router-link
+          >
+          <router-link
             to="/manage"
             active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"

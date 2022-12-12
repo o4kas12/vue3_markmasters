@@ -5,6 +5,7 @@ import dashboard from "@/views/dashboard";
 import Manage from "@/views/Manage";
 import Protected from "@/components/Protected";
 import storageHelper from "storage-helper";
+import logs from "@/views/logs";
 
 const routes = [
   {
@@ -34,6 +35,11 @@ const routes = [
     path: "/protected",
     name: "protected",
     component: Protected,
+  },
+  {
+    path: "/logs",
+    name: "logs",
+    component: logs,
   },
   {
     path: "/about",
