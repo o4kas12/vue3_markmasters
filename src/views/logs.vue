@@ -7,25 +7,80 @@
         </div>
         <br />
         <div class="row">
-          <select id="selected_day" v-model="selected_day" class="form-select">
+          <select
+            @change="this.getLogs"
+            id="selected_day"
+            v-model="payload['days_ago']"
+            class="form-select"
+            style="width: 250px; margin-left: 10px"
+          >
             <option value="0" selected="selected">Сегодня</option>
             <option value="1">1 день назад</option>
             <option value="2">2 дня назад</option>
+            <option value="3">3 дня назад</option>
+            <option value="4">4 дня назад</option>
+            <option value="5">5 дней назад</option>
           </select>
-          <select id="station_ip" v-model="station_ip" class="form-select">
+          <select
+            @change="this.getLogs"
+            id="station_ip"
+            v-model="payload['ip']"
+            class="form-select"
+            style="width: 250px; margin-left: 10px"
+          >
             <option value="192.168.240.213" selected="selected">A1-99</option>
             <option value="192.168.240.213">A1-98</option>
             <option value="192.168.240.213">A1-97</option>
           </select>
-          <br />
-          <div>
-            <button class="btn btn-primary" @click="l">Показать</button>
-          </div>
+          <button
+            class="btn btn-primary"
+            style="width: 250px; margin-left: 10px"
+            @click="this.getLogs"
+          >
+            Показать
+          </button>
         </div>
         <br />
         <app-spinner v-if="loadLogs" />
-        <div class="container" id="textLogs" style="background-color: #42b983">
-          {{ message }}
+        <div
+          v-for="(item, index) in message"
+          :key="index"
+          class="container"
+          id="textLogs"
+        >
+          <div
+            v-if="message[index].includes('start')"
+            style="background-color: limegreen"
+          >
+            {{ message[index].split(";")[1] }}
+            {{ message[index].split(";")[2] }}
+          </div>
+          <div
+            v-else-if="message[index].includes('stop')"
+            style="background-color: indianred"
+          >
+            {{ message[index].split(";")[1] }}
+            {{ message[index].split(";")[2] }}
+          </div>
+          <div
+            v-else-if="message[index].includes('reset')"
+            style="background-color: yellow"
+          >
+            {{ message[index].split(";")[1] }}
+            {{ message[index].split(";")[2] }}
+          </div>
+          <div
+            v-else-if="message[index].includes('Дата производства')"
+            style="background-color: lightpink"
+          >
+            {{ message[index].split(";")[1] }}
+            {{ message[index].split(";")[2] }}
+          </div>
+          <div v-else style="background-color: lightcyan">
+            {{ message[index].split(";")[1] }}
+            {{ message[index].split(";")[2] }}
+            <div v-if="message.length < 2">{{ message[index] }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -35,6 +90,7 @@
 <script>
 import AppSpinner from "@/components/AppSpinner";
 import { ref } from "vue";
+import axios from "axios";
 
 // eslint-disable-next-line no-unused-vars
 const loadLogs = ref(false);
@@ -46,51 +102,35 @@ export default {
   },
   data() {
     return {
-      loadLogs,
-      selected_day: 0,
-      station_ip: "192.168.240.213",
-      message: [],
+      loadLogs, //spinner
+      payload: {
+        ip: "192.168.240.213",
+        days_ago: 0,
+      },
+      message: "",
       errorMessage: "",
       postId: [],
     };
   },
   methods: {
     async getLogs() {
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ip: this.station_ip,
-          days_ago: this.selected_day,
-        }),
-      };
-      fetch(
-        "http://192.168.100.100/terminal/markstation/get_events_log",
-        requestOptions
-      )
-        .then(async (response) => {
-          const data = await response.json();
-
-          // check for error response
-          if (!response.ok) {
-            // get error message from body or default to response status
-            const error = (data && data.message) || response.status;
-            return Promise.reject(error);
-          }
-
-          this.postId = data.id;
-          console.log(this.postId);
-          this.message = data.id;
-        })
-        .catch((error) => {
-          this.errorMessage = error;
-          console.error("There was an error!", error);
-        });
+      loadLogs.value = true;
+      this.payload["days_ago"] = parseInt(this.payload["days_ago"]);
+      this.message = "";
+      const path = "http://192.168.100.100/terminal/markstation/get_events_log";
+      axios.post(path, JSON.stringify(this.payload)).then((res) => {
+        console.log(JSON.stringify(this.payload));
+        console.log(JSON.stringify(res.data));
+        if (res.data["status"] === "error") {
+          this.message = "0";
+        } else if (res.data["message"] == "") {
+          this.message = ["Пусто"];
+        } else {
+          this.message = res.data["message"];
+        }
+        loadLogs.value = false;
+      });
     },
-  },
-  mounted() {
-    console.log("mounted");
-    this.getLogs();
   },
 };
 </script>
