@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-12 innerContent" style="margin-top: -75px">
         <div class="row">
-          <h1 id="titleWithDate">Логи</h1>
+          <h1 id="titleWithDate">События</h1>
         </div>
         <br />
         <div class="row">
@@ -131,6 +131,23 @@ export default {
         loadLogs.value = false;
       });
     },
+  },
+  beforeUnmount() {
+    localStorage.setItem("payload", JSON.stringify(this.payload));
+    console.log(localStorage.getItem("payload"));
+  },
+  mounted() {
+    if (this.payload === "null") {
+      return (this.payload = {
+        ip: "192.168.240.213",
+        days_ago: 0,
+      });
+    } else {
+      this.payload = JSON.parse(localStorage.getItem("payload"));
+    }
+    if (this.message === "") {
+      this.getLogs();
+    }
   },
 };
 </script>

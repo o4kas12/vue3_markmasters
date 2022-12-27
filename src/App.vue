@@ -37,7 +37,7 @@
             to="/logs"
             active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
-            >Логи</router-link
+            >События</router-link
           >
           <router-link
             to="/manage"
