@@ -28,9 +28,13 @@
             class="form-select"
             style="width: 250px; margin-left: 10px"
           >
-            <option value="192.168.240.213" selected="selected">A1-99</option>
-            <option value="192.168.240.213">A1-98</option>
-            <option value="192.168.240.213">A1-97</option>
+            <option
+              v-for="(item, index) in machines"
+              :key="index"
+              :value="machines[index]['main']['ip']"
+            >
+              {{ machines[index]["main"]["id"] }}
+            </option>
           </select>
           <button
             class="btn btn-primary"
@@ -47,37 +51,50 @@
           :key="index"
           class="container"
           id="textLogs"
+          :title="message[index].split(';')[3]"
         >
           <div
             v-if="message[index].includes('start')"
             style="background-color: limegreen"
           >
-            {{ message[index].split(";")[1] }}
+            <strong
+              >{{ message[index].split(";")[1].split("T")[0] + " " }}
+              {{ message[index].split(";")[1].split("T")[1] + " " }}
+            </strong>
             {{ message[index].split(";")[2] }}
           </div>
           <div
             v-else-if="message[index].includes('stop')"
             style="background-color: indianred"
           >
-            {{ message[index].split(";")[1] }}
+            <strong
+              >{{ message[index].split(";")[1].split("T")[0] + " " }}
+              {{ message[index].split(";")[1].split("T")[1] + " " }}
+            </strong>
             {{ message[index].split(";")[2] }}
           </div>
           <div
             v-else-if="message[index].includes('reset')"
             style="background-color: yellow"
           >
-            {{ message[index].split(";")[1] }}
+            <strong
+              >{{ message[index].split(";")[1].split("T")[0] + " " }}
+              {{ message[index].split(";")[1].split("T")[1] + " " }}
+            </strong>
             {{ message[index].split(";")[2] }}
           </div>
           <div
             v-else-if="message[index].includes('Дата производства')"
             style="background-color: lightpink"
           >
-            {{ message[index].split(";")[1] }}
+            <strong
+              >{{ message[index].split(";")[1].split("T")[0] + " " }}
+              {{ message[index].split(";")[1].split("T")[1] + " " }}
+            </strong>
             {{ message[index].split(";")[2] }}
           </div>
           <div v-else style="background-color: lightcyan">
-            {{ message[index].split(";")[1] }}
+            <strong>{{ message[index].split(";")[1] }} </strong>
             {{ message[index].split(";")[2] }}
             <div v-if="message.length < 2">{{ message[index] }}</div>
           </div>
@@ -108,8 +125,7 @@ export default {
         days_ago: 0,
       },
       message: "",
-      errorMessage: "",
-      postId: [],
+      machines: [],
     };
   },
   methods: {
@@ -131,10 +147,22 @@ export default {
         loadLogs.value = false;
       });
     },
+    async getMachines() {
+      if (this.machines.length < 1) {
+        loadLogs.value = true;
+      }
+      const f = await fetch(
+        "http://192.168.100.100/terminal/markstation/get_all_stat"
+      );
+      this.machines = await f.json();
+    },
   },
-  beforeUnmount() {
-    localStorage.setItem("payload", JSON.stringify(this.payload));
-    console.log(localStorage.getItem("payload"));
+  created() {
+    if (JSON.parse(localStorage.getItem("machines")).length > 1) {
+      this.machines = JSON.parse(localStorage.getItem("machines"));
+    } else {
+      this.getMachines();
+    }
   },
   mounted() {
     if (this.payload === "null") {
@@ -148,6 +176,11 @@ export default {
     if (this.message === "") {
       this.getLogs();
     }
+  },
+  beforeUnmount() {
+    localStorage.setItem("payload", JSON.stringify(this.payload));
+    localStorage.setItem("machines", JSON.stringify(this.machines));
+    console.log(localStorage.getItem("payload"));
   },
 };
 </script>
