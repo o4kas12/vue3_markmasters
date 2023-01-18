@@ -20,6 +20,7 @@
             <option value="3">3 дня назад</option>
             <option value="4">4 дня назад</option>
             <option value="5">5 дней назад</option>
+            <option value="6">6 дней назад</option>
           </select>
           <select
             @change="this.getLogs"
@@ -158,19 +159,17 @@ export default {
     },
   },
   created() {
-    if (JSON.parse(localStorage.getItem("machines")).length > 1) {
+    if (JSON.parse(localStorage.getItem("machines"))) {
       this.machines = JSON.parse(localStorage.getItem("machines"));
     } else {
       this.getMachines();
     }
   },
   mounted() {
-    if (this.payload === "null") {
-      return (this.payload = {
-        ip: "192.168.240.213",
-        days_ago: 0,
-      });
-    } else {
+    if (
+      JSON.parse(localStorage.getItem("payload")) &&
+      JSON.parse(localStorage.getItem("payload")) !== null
+    ) {
       this.payload = JSON.parse(localStorage.getItem("payload"));
     }
     if (this.message === "") {
@@ -180,7 +179,7 @@ export default {
   beforeUnmount() {
     localStorage.setItem("payload", JSON.stringify(this.payload));
     localStorage.setItem("machines", JSON.stringify(this.machines));
-    console.log(localStorage.getItem("payload"));
+    //console.log(localStorage.getItem("payload"));
   },
 };
 </script>
