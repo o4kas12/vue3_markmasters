@@ -94,6 +94,16 @@
             </strong>
             {{ message[index].split(";")[2] }}
           </div>
+          <div
+            v-else-if="message[index].includes('режим отладки включен')"
+            style="background-color: red"
+          >
+            <strong
+              >{{ message[index].split(";")[1].split("T")[0] + " " }}
+              {{ message[index].split(";")[1].split("T")[1] + " " }}
+            </strong>
+            {{ message[index].split(";")[2] }}
+          </div>
           <div v-else style="background-color: lightcyan">
             <strong>{{ message[index].split(";")[1] }} </strong>
             {{ message[index].split(";")[2] }}
