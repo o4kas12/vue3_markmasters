@@ -73,7 +73,7 @@
 
 strong.AccordionHeaderState {
     min-width: 86px;
-    text-align: end;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -337,6 +337,48 @@ ul li.checkboxesManage {
     }
     .dashboardCard-body {
         height: 12rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #customCardDashboard {
+        min-width: 5rem!important;
+        max-width: 5.5rem!important;
+        display: inline-flex;
+        margin: 2px;
+
+    }
+    .card-body {
+        padding: 0.8rem 0.5rem 2rem;
+    }
+    .inner-card {
+        margin: -35px -20px -5px;
+    }
+    #dashboard-cards {
+        margin-top: -35px;
+        margin-left: -18px;
+    }
+    .dashboard-card-text {
+        font-size: 9px;
+        margin: -12px -9px 0;
+        line-height: 0.7rem;
+    }
+    .dashboardCard-body {
+        height: 6.5rem;
+    }
+    .card-title {
+        font-size: 0.7rem;
+    }
+    .AccordionHeaderState {
+        font-size: 0.6rem;
+        display: block;
+        margin: -4px -15px 0;
+    }
+    .container-fluid {
+        padding-right: 0;
+        padding-left: 0;
+        margin-right: 0;
+        margin-left: 0;
     }
 }
 

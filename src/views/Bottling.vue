@@ -203,6 +203,7 @@ export default {
     onUnmounted(() => {
       console.log("bottling unmounted");
       clearInterval(this.interValue);
+      this.interValue = null;
     });
     return {
       message: "",

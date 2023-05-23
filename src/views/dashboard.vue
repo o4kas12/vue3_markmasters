@@ -68,7 +68,7 @@
                 productList
                   .map((x) => x.cod_gp)
                   .indexOf(String(machines[index]["main"]["current_cod_gp"]), 0)
-              ].name_gp
+              ].name_gp.split("(")[0]
             }}
           </p>
           <strong
@@ -176,12 +176,15 @@ export default {
         this.getIds();
       });
     },
-    interVal() {
+    startInterval() {
       if (this.interValue) return;
-      const interValue = setInterval(() => {
+      this.interValue = setInterval(() => {
         this.getIds();
       }, 10000);
-      this.interValue = interValue;
+    },
+    stopInterval() {
+      clearInterval(this.interValue);
+      this.interValue = null;
     },
     toastMethod() {
       const toastLive = document.getElementById("toastLive");
@@ -194,7 +197,12 @@ export default {
     console.log("dashboard created");
     this.getProduct();
     this.checkedIds();
-    this.interVal();
+  },
+  mounted() {
+    this.startInterval();
+  },
+  beforeUnmount() {
+    this.stopInterval();
   },
 };
 </script>
