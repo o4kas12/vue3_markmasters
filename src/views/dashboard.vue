@@ -33,7 +33,7 @@
     >
       <router-link
         style="text-decoration: none; color: inherit"
-        :to="'/?station=' + index"
+        :to="'/bottling/?station=' + index"
       >
         <div
           class="card-body dashboardCard-body"

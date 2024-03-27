@@ -9,7 +9,7 @@ import logs from "@/views/logs";
 
 const routes = [
   {
-    path: "/",
+    path: "/bottling",
     name: "Bottling",
     component: Bottling,
   },
@@ -27,7 +27,7 @@ const routes = [
     component: statistics,
   },
   {
-    path: "/dashboard",
+    path: "/",
     name: "dashboard",
     component: dashboard,
   },
@@ -54,6 +54,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
+  base: "/mark-console/",
   routes,
 });
 

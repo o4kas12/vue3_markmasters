@@ -169,7 +169,7 @@
                   <select
                     class="form-select"
                     aria-label="Default select example"
-                    v-model="postedJSON['markstation_id']"
+                    v-model="selectedItem"
                   >
                     <option
                       v-for="(item, index) in by_line"
@@ -186,7 +186,13 @@
               </div>
             </div>
             <br />
-            <button class="btn btn-primary">Отправить</button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              @click="sendPostQuery"
+            >
+              Отправить
+            </button>
           </form>
         </div>
       </div>
@@ -202,34 +208,6 @@ import AppSpinner from "@/components/AppSpinner";
 import { ref } from "vue";
 
 const loadAlerts = ref(false);
-let postedJSON = {
-  markstation_id: "",
-  source_date: "2022-10-31",
-  good_codes: 0,
-  defect_codes: 0,
-  total_codes: 0,
-  duplicates_codes: 0,
-  current_gtin: "4602547000176",
-  current_cod_gp: "",
-  current_batch_date: "2022-11-01",
-  plc_state: {
-    alarm_no_scanner: "1",
-    time_imp_upakovki: "0",
-    scaner_noread_counter: "0",
-    scaner_trigger_counter: "1",
-    count_no_zapusk_scaner: "0",
-    count_no_trans_metka: "0",
-    count_brak_no_zazor: "0",
-    time_imp_upakovki_2: "0",
-    scaner_noread_counter_2: "0",
-    scaner_trigger_counter_2: "0",
-    count_no_zapusk_scaner_2: "0",
-    count_no_trans_metka_2: "0",
-    count_brak_no_zazor_2: "0",
-    machine_status: "1",
-    message_from_plc: "10:40:12;OK                              ",
-  },
-};
 
 // eslint-disable-next-line no-unused-vars
 const byLine = "http://192.168.100.100:8021/by_line";
@@ -254,12 +232,33 @@ export default {
       status: [],
       showStatus: false,
       loadAlerts,
-      postedJSON,
+      postedJSON: {},
+      selectedItem: "",
     };
   },
   components: {
     alert: Alert,
     AppSpinner: AppSpinner,
+  },
+  computed: {
+    // eslint-disable-next-line vue/no-dupe-keys
+    postedJSON() {
+      const selectedItem = this.selectedItem;
+      const markstation_id = selectedItem.split("'")[1];
+      const current_cod_gp = selectedItem.split("'")[3];
+      return {
+        markstation_id,
+        source_date: "",
+        good_codes: 0,
+        defect_codes: 2,
+        total_codes: 0,
+        duplicates_codes: 0,
+        current_gtin: "",
+        current_cod_gp,
+        current_batch_date: "",
+        plc_state: {},
+      };
+    },
   },
   methods: {
     // собираем данные в переменную machines
@@ -364,6 +363,9 @@ export default {
           clearInterval(intervalId);
         }, 61000);
       });
+    },
+    sendPostQuery() {
+      console.log(JSON.stringify(this.postedJSON));
     },
   },
   created() {

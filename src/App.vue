@@ -16,13 +16,13 @@
         <div class="list-group list-group-flush">
           <br />
           <router-link
-            to="/dashboard"
+            to="/"
             active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
             >Dashboard</router-link
           >
           <router-link
-            to="/"
+            to="/bottling"
             active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
             >Розлив</router-link
