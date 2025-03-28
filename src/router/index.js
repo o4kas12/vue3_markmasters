@@ -6,6 +6,7 @@ import Manage from "@/views/Manage";
 import Protected from "@/components/Protected";
 import storageHelper from "storage-helper";
 import logs from "@/views/logs";
+import code_history from "@/views/code_history";
 
 const routes = [
   {
@@ -40,6 +41,11 @@ const routes = [
     path: "/logs",
     name: "logs",
     component: logs,
+  },
+  {
+    path: "/code_history",
+    name: "code_history",
+    component: code_history,
   },
   {
     path: "/about",

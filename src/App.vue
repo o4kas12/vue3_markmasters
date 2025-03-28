@@ -40,6 +40,12 @@
             >События</router-link
           >
           <router-link
+            to="/code_history"
+            active-class="active"
+            class="list-group-item list-group-item-action list-group-item-light p-3"
+            >История кода</router-link
+          >
+          <router-link
             to="/manage"
             active-class="active"
             class="list-group-item list-group-item-action list-group-item-light p-3"
