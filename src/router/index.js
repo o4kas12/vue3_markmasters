@@ -6,6 +6,7 @@ import Manage from "@/views/Manage";
 import Protected from "@/components/Protected";
 import storageHelper from "storage-helper";
 import logs from "@/views/logs";
+import printpage from "@/views/printpage";
 
 const routes = [
   {
@@ -42,13 +43,9 @@ const routes = [
     component: logs,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/printpage",
+    name: "printpage",
+    component: printpage,
   },
 ];
 
