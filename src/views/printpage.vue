@@ -37,6 +37,9 @@
       </div>
 
       <button type="submit">Отправить</button>
+      <button type="button" @click="stopPrint" class="stop-button">
+        Остановить печать
+      </button>
     </form>
   </div>
 </template>
@@ -47,9 +50,9 @@ export default {
   data() {
     return {
       printerIp: "192.168.100.121",
-      selectedProductIndex: 0, // Изначально выбран первый продукт
+      selectedProductIndex: 0,
       quantity: 1,
-      productionDate: new Date().toISOString().substr(0, 10), // Устанавливаем текущую дату
+      productionDate: new Date().toISOString().substr(0, 10),
       productList: [
         { name: "Сливки Клевер 10% 500г", gtin: "4602547000022" },
         { name: "Сливки Клевер 20% 500г", gtin: "4602547001203" },
@@ -61,7 +64,7 @@ export default {
   methods: {
     async sendPrintRequest() {
       let selectedProduct = this.productList[this.selectedProductIndex];
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line
       const response = await fetch("http://10.10.3.27:5000/print", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,6 +75,14 @@ export default {
           gtin: selectedProduct.gtin,
           productionDate: this.productionDate,
         }),
+      });
+    },
+    async stopPrint() {
+      // eslint-disable-next-line
+      const response = await fetch("http://10.10.3.27:5000/stop", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ printerIp: this.printerIp }),
       });
     },
   },
@@ -123,5 +134,14 @@ button {
 
 button:hover {
   background-color: darkblue;
+}
+
+.stop-button {
+  background-color: red;
+  margin-top: 10px;
+}
+
+.stop-button:hover {
+  background-color: darkred;
 }
 </style>
